@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>TP4</title>
+	<link rel="stylesheet" href="/css/styles.css">
+   <link rel="stylesheet" data-th-href="@{/webjars/bootstrap/5.3.3/css/bootstrap.min.css}">
+</head>
+<body>
+	<aside class="aside py-0 my-0" data-th-fragment="aside">
+		<div class="accordion" id="menu">
+			<div class="accordion-item">
+			  <h2 class="accordion-header">
+				<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
+				  MENU
+				</button>
+			  </h2>
+			  <div id="collapseFour" class="accordion-collapse collapse show" data-bs-parent="#menu">
+				<div class="accordion-body">
+					<ul class="list-group list-group-flush">
+						<li class="list-group-item"><a class="link-index" target="_blank" href="https://fi.unju.edu.ar/servicios/biblioteca.html">Biblioteca</a></li>
+						<li class="list-group-item"><a class="link-index" target="_blank" href="https://becas.unju.edu.ar/">Becas Unju</a></li>
+						<li class="list-group-item"><a class="link-index" target="_blank" href="https://www.fi.unju.edu.ar/institucional/reglamentos.html">Reglamentos</a></li>
+						<li class="list-group-item"><a class="link-index" target="_blank" href="https://www.fi.unju.edu.ar/institucional/autoridades.html">Autoridades</a></li>
+						<li class="list-group-item"><a class="link-index" target="_blank" href="https://www.fi.unju.edu.ar/practicaprofesional.html">Practica Profesional</a></li>
+					  </ul>
+				</div>
+			  </div>
+			</div>
+		</div>		  
+		<div class="card mt-2">
+			<h5 class="card-header text-center">AGENDA FI</h5>
+			<div class="card-body">
+				<img src="/images/agenda.png" class="card-img-top" alt="Agenda">
+			</div>
+		</div>
+		<div class="card mt-2">
+			<h5 class="card-header text-center">52 ANIVERSARIO</h5>
+			<div class="card-body">
+				<img src="/images/52-aniversario.jpeg" class="card-img-top" alt="Aniversario 52 de la Facultad de Ingeniería">
+			</div>
+		</div>
+	</aside>
+	  <script data-th-src="@{/webjars/bootstrap/5.3.3/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>

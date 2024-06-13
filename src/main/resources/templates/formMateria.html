@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Facultad de Ingeniería</title>
+	<link rel="icon" href="/images/logo.ico">
+	<link rel="stylesheet" data-th-href="@{/css/styles.css}">
+	<link rel="stylesheet" data-th-href="@{/webjars/bootstrap/5.3.3/css/bootstrap.min.css}">
+</head>
+
+<body>
+
+	<header>
+		<div data-th-replace="~{fragments/header::header}"></div>
+	</header>
+	<section class="section">
+		<h1>FORMULARIO DE MATERIA</h1>
+		<div class="justify-content-center text-center">
+
+		<form data-th-object="${nuevaMateria}" data-th-action="${flag}?@{/modificarMateria}:@{/guardarMateria}"
+			method="post" class="form">
+			<div class="row">
+				<div class="col-sm-6">
+					<label for="codigo" class="form-label mt-1">Codigo</label>
+					<input type="text" class="form-control" id="codigo" data-th-field="*{codigo}"
+						data-th-readonly="${flag}" required>
+
+					<label for="nombre" class="form-label mt-1">Nombre</label>
+					<input type="text" class="form-control" id="nombre" data-th-field="*{nombre}" required>
+
+				</div>
+				<div class="col-sm-6">
+					<label for="curso" class="form-label mt-1">Curso</label>
+					<input type="text" class="form-control" id="curso" data-th-field="*{curso}" required>
+
+					<label for="horas" class="form-label mt-1">Horas</label>
+					<input type="number" class="form-control" id="horas" data-th-field="*{horas}">
+
+				</div>
+				<div class="col-sm-4 text-center">
+					<label for="modalidad" class="form-label mt-1">Modalidad</label><br>
+					<select class="form-select text-center" id="modalidad" data-th-field="*{modalidad}">
+						<option value="">Seleccionar Modalidad</option>
+						<option value="Presencial">Presencial</option>
+						<option value="Virtual">Virtual</option>
+					</select>
+				</div>
+
+				<div class="col-sm-4 text-center">
+					<label for="docente" class="form-label mt-1">Docente</label><br>
+					<select class="form-select text-center" id="docente" data-th-field="*{docente.legajo}" required>
+						<option value="">Seleccionar Docente</option>
+						<option data-th-each="d:${listadoDocentes}" data-th-value="${d.legajo}"
+							data-th-text="${d.apellido}"></option>
+					</select>
+				</div>
+
+				<div class="col-sm-4 text-center">
+					<label for="carrera" class="form-label mt-1">Carrera</label><br>
+					<select class="form-select text-center" id="carrera" data-th-field="*{carrera.codigo}" required>
+						<option value="">Seleccionar Carrera</option>
+						<option data-th-each="c:${listadoCarreras}" data-th-value="${c.codigo}"
+							data-th-text="${c.nombre}"></option>
+					</select>
+				</div>
+			</div>
+			<button type="submit" class="btn btn-primary mt-2 mb-3">Guardar Materia</button>
+		</form>
+		</div>
+		<br>
+	</section>
+	<footer>
+		<div data-th-replace="~{fragments/footer::footer}"></div>
+	</footer>
+
+	<script data-th-src="@{/webjars/bootstrap/5.3.3/js/bootstrap.bundle.min.js}"></script>
+</body>
+
+</html>

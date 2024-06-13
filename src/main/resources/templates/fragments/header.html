@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es"> 
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Facultad de Ingeniería</title>
+	<link rel="stylesheet" href="/css/styles.css">
+   <link rel="stylesheet" data-th-href="@{/webjars/bootstrap/5.3.3/css/bootstrap.min.css}">
+</head>
+<body>
+	<header class="row"data-th-fragment="header">
+		<nav class="navbar navbar-expand-lg navbar-light" >
+		  <div class="container-fluid">
+			<a class="navbar-brand mt-2 mt-lg-0" href="/main/index">
+				<img
+					src="/images/logo-fi-unju.png"
+					height="50"
+					width="250"
+					alt="Facultad de Ingeniería Unju"
+				/>
+				</a>
+		    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+		      <span class="navbar-toggler-icon"></span>
+		    </button>
+		    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+		      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+		        <li class="nav-item">
+		          	<a class="btc nav-link active" aria-current="page" href="#acerca-de" >ACERCA DE</a>
+		        </li>
+		        <li class="nav-item">
+		          <a class="btc  nav-link" href="#contacto">CONTACTO</a>
+		        </li>
+		        <li class="nav-item dropdown">
+		          <a class="btc nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+		            CARRERAS
+		          </a>
+		          <ul class="dropdown-menu">
+		            <li><a class="dropdown-item" href="#carreras-grado" >CARRERAS DE GRADO</a></li>
+		            <li><a class="dropdown-item" href="#carreras-pregrado" >CARRERAS PRE GRADO</a></li>
+		            <li><hr class="dropdown-divider"></li>
+		            <li><a class="dropdown-item" href="https://www.fi.unju.edu.ar/carreras/cunt.html" target="_blank">OTROS CONVENIOS</a></li>
+		          </ul>
+		        </li>
+				<li class="nav-item dropdown">
+					<a class="btc nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+					  GESTION
+					</a>
+					<ul class="dropdown-menu text-center">
+						<li class="dropdown-item dropend py-0 my-0">
+							<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+								ALUMNO
+							</a>
+							<ul class="dropdown-menu">
+								<li><a class="dropdown-item" href="/formularioAlumno" >REGISTRAR ALUMNO</a></li>
+								<li><a class="dropdown-item" href="/listadoAlumnos" >LISTADO DE ALUMNOS</a></li>
+							</ul>
+						</li>
+						<li><hr class="dropdown-divider py-0 my-0"></li>  
+						<li class="dropdown-item dropend py-0 my-0">
+							<a class="nav-link dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+								DOCENTE
+							</a>
+							<ul class="dropdown-menu">
+								<li><a class="dropdown-item" href="/formularioDocente" >REGISTRAR DOCENTE</a></li>
+								<li><a class="dropdown-item" href="/listadoDocentes" >LISTADO DE DOCENTES</a></li>
+							</ul>
+						</li>
+						<li><hr class="dropdown-divider py-0 my-0"></li>
+						<li class="dropdown-item dropend py-0 my-0">
+							<a class="nav-link dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+								CARRERA
+							</a>
+							<ul class="dropdown-menu">
+								<li><a class="dropdown-item" href="/formularioCarrera" >REGISTRAR CARRERA</a></li>
+								<li><a class="dropdown-item" href="/listadoCarreras" >LISTADO DE CARRERAS</a></li>
+							</ul>
+						</li>
+						<li><hr class="dropdown-divider py-0 my-0"></li>
+						<li class="dropdown-item dropend py-0 my-0">
+							<a class="nav-link dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+								MATERIA
+							</a>
+							<ul class="dropdown-menu">
+								<li><a class="dropdown-item" href="/formularioMaterias" >REGISTRAR MATERIA</a></li>
+								<li><a class="dropdown-item" href="/listadoMaterias" >LISTADO DE MATERIAS</a></li>
+							</ul>
+						</li>
+					</ul>
+				  </li>
+		        <li class="nav-item">
+					<a class="btc nav-link" href="#noticias">NOTICIAS</a>
+				</li>
+				
+				<li class="nav-item">
+					<p class="btc nav-link mb-2 text-body-secondary" href="#" >EL FUTURO NOS ACOMPAÑA</p>
+				</li>
+				
+		      </ul>
+		    </div>
+		  </div>
+		</nav> 
+	</header>
+
+    <script data-th-src="@{/webjars/bootstrap/5.3.3/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>

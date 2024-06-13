@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es"> 
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Facultad de Ingeniería</title>
+	<link rel="icon" href="/images/logo.ico">
+	<link rel="stylesheet" href="/css/styles.css">
+   <link rel="stylesheet" data-th-href="@{/webjars/bootstrap/5.3.3/css/bootstrap.min.css}">
+</head>
+<body>
+	<header>
+		<div data-th-replace="~{fragments/header::header}"></div>
+	</header>
+	<section class="section">
+		<h1> LISTADO DE DOCENTES </h1>
+		<table class="table table-striped text-center">
+		  <thead>
+			<tr>
+			  <th scope="col">Legajo</th>
+			  <th scope="col">Nombre</th>
+			  <th scope="col">Apellido</th>
+			  <th scope="col">Email</th>
+			  <th scope="col">Telefono</th>
+			  <th scope="col">Edicion</th>
+			</tr>
+		  </thead>
+		  <tbody>
+			<tr data-th-each="docente : ${listadoDocentes}">
+			  <td data-th-text="${docente.legajo}"></td>
+			  <td data-th-text="${docente.nombre}"></td>
+			  <td data-th-text="${docente.apellido}"></td>
+			  <td data-th-text="${docente.email}"></td>
+			  <td data-th-text="${docente.telefono}"></td>
+				  <td>
+					<a data-th-href="@{'/borrarDocente/'+${docente.legajo}}" class="btn btn-danger">Borrar</a>					
+					<a data-th-href="@{'/modificarDocente/'+${docente.legajo}}" class="btn btn-warning" >Modificar</a>
+				</td>
+			</tr>
+		   </tbody>
+		</table>
+		<br>
+	</section>
+	<footer>
+			<div data-th-replace="~{fragments/footer::footer}"></div>
+	</footer>
+<script	data-th-src="@{/webjars/bootstrap/5.3.3/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>
