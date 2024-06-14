@@ -7,51 +7,57 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
-/*
-import ar.edu.unju.fi.collections.ListadoCarreras;
+
 import ar.edu.unju.fi.model.Carrera;
-import ch.qos.logback.core.net.SyslogOutputStream;
+import ar.edu.unju.fi.service.CarreraService;
 
 @Controller
 public class CarreraController {
 	@Autowired
 	Carrera nuevaCarrera;
 	
+	@Autowired
+	CarreraService carreraService;
+	
 	@GetMapping("/formularioCarrera")
 	public ModelAndView getFormCarrera() {
 		ModelAndView modelView = new ModelAndView("formCarrera");
 		modelView.addObject("nuevaCarrera", nuevaCarrera);	
-		modelView.addObject("flag", false);
+		modelView.addObject("band", false);
 		return modelView;
-	}
-	
-	@GetMapping("/listadoCarreras")
-	public ModelAndView getFormListaCarrera() {
-		ModelAndView modelView = new ModelAndView("listaDeCarreras");
-		modelView.addObject("listadoCarreras", ListadoCarreras.listarCarreras());	
-		return modelView;	
 	}
 	
 	@PostMapping("/guardarCarrera")
 	public ModelAndView saveCarrera(@ModelAttribute("nuevaCarrera") Carrera carreraParaGuardar) {
 
-		ListadoCarreras.agregarCarrera(carreraParaGuardar);
+		//ListadoCarreras.agregarCarrera(carreraParaGuardar);
+		carreraService.guardarCarrera(carreraParaGuardar);
 		ModelAndView modelView = new ModelAndView("listaDeCarreras");
-		modelView.addObject("listadoCarreras", ListadoCarreras.listarCarreras());	
+		//modelView.addObject("listadoCarreras", ListadoCarreras.listarCarreras());	
+		modelView.addObject("listadoCarreras", carreraService.mostrarCarreras());
 		
 		return modelView;		
 	}
 	
+	@GetMapping("/listadoCarreras")
+	public ModelAndView getFormListaCarrera() {
+		ModelAndView modelView = new ModelAndView("listaDeCarreras");
+		//modelView.addObject("listadoCarreras", ListadoCarreras.listarCarreras());	
+		return modelView;	
+	}
+	
+
 	@GetMapping("/borrarCarrera/{codigo}")
 	public ModelAndView deleteCarreraDelListado(@PathVariable(name="codigo") String codigo) {
 
-		ListadoCarreras.eliminarCarrera(codigo);
+		//ListadoCarreras.eliminarCarrera(codigo);
+		carreraService.borrarCarrera(codigo);
 		ModelAndView modelView = new ModelAndView("listaDeCarreras");
-		modelView.addObject("listadoCarreras", ListadoCarreras.listarCarreras());	
+		modelView.addObject("listadoCarreras", carreraService.mostrarCarreras());	
 		
 		return modelView;		
 		}
-	
+	/*
 	  @GetMapping("/modificarCarrera/{codigo}")
 	    public ModelAndView getFormModificarCarrera(@PathVariable(name="codigo") String codigo) {
 	        Carrera carrera = ListadoCarreras.buscarCarreraPorCodigo(codigo);
@@ -69,5 +75,5 @@ public class CarreraController {
 	        ModelAndView modelView = new ModelAndView("listaDeCarreras");
 	        modelView.addObject("listadoCarreras", ListadoCarreras.listarCarreras());
 	        return modelView;
-	    }
-}*/
+	    }*/
+}
