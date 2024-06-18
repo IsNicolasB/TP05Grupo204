@@ -3,11 +3,13 @@ package ar.edu.unju.fi.service.imp;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import ar.edu.unju.fi.model.Carrera;
 import ar.edu.unju.fi.repository.CarreraRepository;
 import ar.edu.unju.fi.service.CarreraService;
 
+@Service
 public class CarreraServiceImp implements CarreraService{
 	
 	@Autowired
