@@ -23,7 +23,7 @@ public class CarreraController {
 	public ModelAndView getFormCarrera() {
 		ModelAndView modelView = new ModelAndView("formCarrera");
 		modelView.addObject("nuevaCarrera", nuevaCarrera);	
-		modelView.addObject("band", false);
+		modelView.addObject("flag", false);
 		return modelView;
 	}
 	
