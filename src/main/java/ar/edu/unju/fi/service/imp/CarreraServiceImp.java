@@ -17,19 +17,18 @@ public class CarreraServiceImp implements CarreraService{
 	
 	@Override
 	public void guardarCarrera(Carrera carrera) {
-		// TODO Auto-generated method stub
-		carreraRepository.save(carrera);
+		if(!carreraRepository.existsById(carrera.getCodigo())) {
+			carreraRepository.save(carrera);
+		}
 	}
 
 	@Override
 	public List<Carrera> mostrarCarreras() {
-		// TODO Auto-generated method stub
 		return carreraRepository.findCarreraByEstado(true);
 	}
 
 	@Override
 	public void borrarCarrera(String codigo) {
-		// TODO Auto-generated method stub
 		List<Carrera> carreras = carreraRepository.findAll();
 		carreras.forEach(carrera -> {
 			if(carrera.getCodigo().equals(codigo)) {
@@ -41,14 +40,12 @@ public class CarreraServiceImp implements CarreraService{
 
 	@Override
 	public Carrera buscarCarrera(String codigo) {
-		// TODO Auto-generated method stub
-		return null;
+		return carreraRepository.getReferenceById(codigo);
 	}
 
 	@Override
 	public void modificarCarrera(Carrera carrera) {
-		// TODO Auto-generated method stub
-		
+		carreraRepository.save(carrera);
 	}
 	
 }
