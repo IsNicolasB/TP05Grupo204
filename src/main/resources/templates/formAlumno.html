@@ -22,6 +22,9 @@
 				method="post" class="form">
 				<div class="row">
 					<div class="col-sm-6">
+						<label for="lu" class="form-label mt-1">Libreta Universitaria</label>
+						<input type="text" class="form-control" id="lu" data-th-field="*{lu}" data-th-readonly="${flag}" required>
+						
 						<label for="dni" class="form-label mt-1">DNI</label>
 						<input type="text" class="form-control" id="dni" data-th-field="*{dni}" required>
 
@@ -45,8 +48,11 @@
 						<label for="domicilio" class="form-label mt-1">Domicilio</label>
 						<input type="text" class="form-control" id="domicilio" data-th-field="*{domicilio}" required>
 
-						<label for="lu" class="form-label mt-1">Libreta Universitaria</label>
-						<input type="text" class="form-control" id="lu" data-th-field="*{lu}" required>
+						<label for="estadoAlumno" class="form-label mt-1">Estado</label>
+						<select id="estadoAlumno" data-th-field="*{alumno.estado}" class="form-select" required>
+							<option value="true">True</option>
+							<option value="false">False</option>
+						</select>
 					</div>
 				</div>
 				<button type="submit" class="btn btn-primary mt-2 mb-3">Guardar Alumno</button>

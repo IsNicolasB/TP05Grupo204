@@ -13,8 +13,10 @@ public class AlumnoServiceImp implements AlumnoService{
 
 	@Override
 	public void guardarAlumno(Alumno alumno) {
-		alumno.setEstado(true);
-		alumnoRepository.save(alumno);
+		if(!alumnoRepository.existsById(alumno.getLU())) {
+			alumno.setEstado(true);
+			alumnoRepository.save(alumno);
+		}
 	}
 
 	@Override
@@ -45,7 +47,6 @@ public class AlumnoServiceImp implements AlumnoService{
 //			}
 //			i++;
 //		}
-		alumnoModificado.setEstado(true);
 		alumnoRepository.save(alumnoModificado);
 	}
 
