@@ -43,6 +43,12 @@
 						<label for="telefono" class="form-label mt-1">Telefono</label>
 						<input type="text" class="form-control" id="telefono" data-th-field="*{telefono}" maxlength="10"
 							minlength="10" required>
+							
+						<label class="form-label" for="estado">Estado</label>
+						<select data-th-field="*{estado}" class="form-control" required>
+						<option data-th-value="true">True</option>
+						<option data-th-value="false">False</option>
+						</select>
 					</div>
 
 				</div>
