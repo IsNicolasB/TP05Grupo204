@@ -36,10 +36,17 @@
 					<input type="text" class="form-control" id="curso" data-th-field="*{curso}" required>
 
 					<label for="horas" class="form-label mt-1">Horas</label>
-					<input type="number" class="form-control" id="horas" data-th-field="*{horas}">
+					<input type="number" class="form-control" id="horas" data-th-field="*{cantidadHoras}">
 
 				</div>
-				<div class="col-sm-4 text-center">
+				<div class="col-sm-6">
+					<label for="estadoMateria" class="form-label mt-1">Estado</label><br>
+					<select class="form-select text-center" id="estadoMateria" data-th-field="*{estado}">
+						<option value="true">True</option>
+						<option value="false">False</option>
+					</select>
+				</div>
+				<div class="col-sm-6 text-center">
 					<label for="modalidad" class="form-label mt-1">Modalidad</label><br>
 					<select class="form-select text-center" id="modalidad" data-th-field="*{modalidad}">
 						<option value="">Seleccionar Modalidad</option>
@@ -47,24 +54,35 @@
 						<option value="Virtual">Virtual</option>
 					</select>
 				</div>
-
+				<!--  
 				<div class="col-sm-4 text-center">
-					<label for="docente" class="form-label mt-1">Docente</label><br>
-					<select class="form-select text-center" id="docente" data-th-field="*{docente.legajo}" required>
-						<option value="">Seleccionar Docente</option>
-						<option data-th-each="d:${listadoDocentes}" data-th-value="${d.legajo}"
+				
+					<form>
+						<label for="docente" class="form-label mt-1"> Docente
+							<input list="docentesOpciones">
+						</label><br>
+						<datalist class="form-select text-center" id="docentesOpciones docente" data-th-field="*{docente.legajo}" required>
+							<option value="">Seleccionar Docente</option>
+							<option data-th-each="d:${listadoDocentes}" data-th-value="${d.legajo}"
 							data-th-text="${d.apellido}"></option>
-					</select>
+						</datalist>
+					</form>
+					
 				</div>
 
 				<div class="col-sm-4 text-center">
-					<label for="carrera" class="form-label mt-1">Carrera</label><br>
-					<select class="form-select text-center" id="carrera" data-th-field="*{carrera.codigo}" required>
-						<option value="">Seleccionar Carrera</option>
-						<option data-th-each="c:${listadoCarreras}" data-th-value="${c.codigo}"
-							data-th-text="${c.nombre}"></option>
-					</select>
+					<form>
+						<label for="carrera" class="form-label mt-1"> Carrera
+							<input list="carrerasOpciones">
+						</label><br>
+						<datalist class="form-select text-center" id="carrerasOpciones carrera" data-th-field="*{carrera.codigo}" required>
+							<option value="">Seleccionar Carrera</option>
+							<option data-th-each="c:${listadoCarreras}" data-th-value="${c.codigo}"
+								data-th-text="${c.nombre}"></option>
+						</datalist>
+					</form>
 				</div>
+				-->
 			</div>
 			<button type="submit" class="btn btn-primary mt-2 mb-3">Guardar Materia</button>
 		</form>
