@@ -12,7 +12,7 @@ import ar.edu.unju.fi.service.AlumnoService;
 @Controller
 public class AlumnoController {
 	@Autowired
-	Alumno nuevoAlumno;
+	Alumno nuevoAlumno=new Alumno();
 	
 	@Autowired
 	AlumnoService alumnoService;

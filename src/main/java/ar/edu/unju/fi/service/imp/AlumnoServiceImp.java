@@ -13,7 +13,7 @@ public class AlumnoServiceImp implements AlumnoService{
 
 	@Override
 	public void guardarAlumno(Alumno alumno) {
-		if(!alumnoRepository.existsById(alumno.getLU())) {
+		if(!alumnoRepository.existsById(alumno.getLu())) {
 			alumno.setEstado(true);
 			alumnoRepository.save(alumno);
 		}
@@ -25,7 +25,7 @@ public class AlumnoServiceImp implements AlumnoService{
 	}
 
 	@Override
-	public void borrarAlumno(String LU) {
+	public void borrarAlumno(String lu) {
 //		List<Alumno> alumnos = alumnoRepository.findAll();
 //		for (Alumno alumno : alumnos) {
 //			if (alumno.getDni().equals(dni)) {
@@ -34,7 +34,9 @@ public class AlumnoServiceImp implements AlumnoService{
 //			    break;
 //			}
 //		}
-		alumnoRepository.getReferenceById(LU).setEstado(false);
+		Alumno alumno=alumnoRepository.findById(lu).get();
+		alumno.setEstado(false);
+		alumnoRepository.save(alumno);
 	}
 
 	@Override
@@ -51,8 +53,8 @@ public class AlumnoServiceImp implements AlumnoService{
 	}
 
 	@Override
-	public Alumno buscarAlumno(String LU) {
-		return alumnoRepository.getReferenceById(LU);
+	public Alumno buscarAlumno(String lu) {
+		return alumnoRepository.getReferenceById(lu);
 	}
 	
 }

@@ -8,7 +8,7 @@ import lombok.Data;
 @Entity
 public class Alumno {
 	@Id
-	private String LU;
+	private String lu;
 	private String dni;
 	private String nombre;
 	private String apellido;
