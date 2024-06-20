@@ -39,7 +39,14 @@
 					<input type="number" class="form-control" id="horas" data-th-field="*{cantidadHoras}">
 
 				</div>
-				<div class="col-sm-4 text-center">
+				<div class="col-sm-6">
+					<label for="estadoMateria" class="form-label mt-1">Estado</label><br>
+					<select class="form-select text-center" id="estadoMateria" data-th-field="*{estado}">
+						<option value="true">True</option>
+						<option value="false">False</option>
+					</select>
+				</div>
+				<div class="col-sm-6 text-center">
 					<label for="modalidad" class="form-label mt-1">Modalidad</label><br>
 					<select class="form-select text-center" id="modalidad" data-th-field="*{modalidad}">
 						<option value="">Seleccionar Modalidad</option>

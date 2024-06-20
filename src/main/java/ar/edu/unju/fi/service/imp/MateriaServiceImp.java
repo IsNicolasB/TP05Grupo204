@@ -18,8 +18,9 @@ public class MateriaServiceImp implements MateriaService{
 	@Override
 	public void guardarMateria(Materia materia) {
 		// TODO Auto-generated method stub
-		materia.setEstado(true);
-		materiaRepository.save(materia);
+		if (!materiaRepository.existsById(materia.getCodigo())) {
+			materiaRepository.save(materia);
+		}
 	}
 
 	@Override
