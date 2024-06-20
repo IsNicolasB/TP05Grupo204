@@ -1,0 +1,140 @@
+@charset "UTF-8";
+
+h1{
+	font-family: sans-serif;
+	font-weight: 30px;
+	padding-top:20px;
+	text-align: center;
+	letter-spacing: 2px;
+  color: #223446;
+}
+
+.form {
+  padding: 20px;
+  border: 1px solid #a6aec1;
+  border-radius: 10px;
+  background-color: #cfd5e1;
+  color: #2c2c2c;
+}
+
+.navbar{
+  background-color: #cfd5e1;
+}
+
+.navbar-light .nav-item .btc:hover {
+  background-color: #6c788e;
+  transition: all 0.3s ease, font-weight 0.3s ease;
+  color: #fff;
+  font-variant: small-caps;
+  font-weight: bold;
+}
+
+.dropdown:hover>.dropdown-menu {
+  display: block;
+}
+
+.dropdown>.dropdown-toggle:active {
+    pointer-events: none;
+}
+
+.dropdown-menu .dropdown-item:hover {
+  background-color: #6c788e;
+  transition: all 0.3s ease;
+  color: #fff;
+  font-variant: small-caps;
+}
+
+.dropdown-menu {
+  background-color: #cfd5e1 !important;
+  --bs-dropdown-border-radius: none !important;
+}
+
+.footer{
+  background-color: #4c5d71;
+  color: #fcfdff;
+  font-family:sans-serif;
+}
+
+.main, aside, section{
+  background-color: #ededf2;
+}
+
+.pad{
+  padding-left: 12px;
+}
+
+.link-footer {
+  color: #ededf2; 
+  text-decoration: none;
+  font-size: 16px; 
+  transition: color 0.3s ease, font-weight 0.3s ease;
+}
+.link-footer:hover {
+  color: #cfd5e1;
+  font-weight: bold;
+}
+
+.link-index {
+  color: black; 
+  text-decoration: none;
+  font-size: 16px; 
+  transition: color 0.3s ease, font-weight 0.3s ease;
+}
+
+.link-index:hover {
+  color: #4c5d71;
+  font-weight: bold;
+}
+
+.accordion .accordion-body {
+  background-color: #cfd5e1; 
+  color: #333;
+}
+
+/* Estilo para los elementos de la lista dentro del acordeón */
+.accordion .list-group-item {
+  background-color: transparent; 
+  color: #cfd5e1; 
+  padding: 10px 15px; 
+  transition: background-color 0.3s ease, color 0.3s ease, font-weight 0.3s ease; 
+}
+
+.accordion-header .accordion-button {
+  background-color: #a6aec1; 
+  color: #223446; 
+}
+
+.accordion-header .accordion-button:not(.collapsed) {
+  background-color: #a6aec1; 
+  color: #223446; 
+}
+
+.accordion-header .accordion-button:hover {
+  background-color: #4c5d71;
+  color: #ffffff; 
+  font-weight: bold;
+}
+
+/*Cards */
+
+.card-header {
+  background-color: #a6aec1 !important; 
+  color: #223446 !important; 
+  text-align: center; 
+}
+
+.card-body {
+  background-color: #cfd5e1; 
+  color: #223446; 
+}
+
+.card-body .card-img-top {
+  width: 100%;
+  height: auto;
+}
+
+/* Table */
+
+.table{
+  margin-bottom: 0 !important;
+}

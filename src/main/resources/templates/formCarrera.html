@@ -23,13 +23,21 @@
 					method="post" class="form">
 
 					<label for="codigo" class="form-label mt-1">Codigo</label>
-					<input type="text" class="form-control" id="codigo" data-th-field="*{codigo}" data-th-readonly="${flag}" required>
+					<input type="text" class="form-control" id="codigo" data-th-field="*{codigo}"
+						data-th-readonly="${flag}" required>
 
 					<label for="nombre" class="form-label mt-1">Nombre Carrera</label>
 					<input type="text" class="form-control" id="nombre" data-th-field="*{nombre}" required>
 
-					<label for="cantidad" class="form-label mt-1">Cantidad Años</label>
-					<input type="number" class="form-control" id="cantidad" data-th-field="*{cantAños}">
+					<label for="duracion" class="form-label mt-1">Cantidad de Años</label>
+					<input type="number" class="form-control" id="duracion" data-th-field="*{duracion}" required>
+
+					<label class="form-label" for="estado">Estado</label>
+					<select data-th-field="*{estado}" class="form-control" required>
+						<option data-th-value="true">True</option>
+						<option data-th-value="false">False</option>
+
+					</select>
 
 					<button type="submit" class="btn btn-primary mt-2 mb-3">Guardar Carrera</button>
 				</form>
