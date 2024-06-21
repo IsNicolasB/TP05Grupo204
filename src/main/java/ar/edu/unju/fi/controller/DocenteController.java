@@ -8,13 +8,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import ar.edu.unju.fi.DTO.DocenteDTO;
 import ar.edu.unju.fi.model.Docente;
 import ar.edu.unju.fi.service.DocenteService;
 
 @Controller
 public class DocenteController {
 	@Autowired
-	Docente nuevoDocente;
+	DocenteDTO nuevoDocenteDTO;
 	
 	@Autowired
 	DocenteService docenteService;
@@ -23,15 +24,15 @@ public class DocenteController {
 	public ModelAndView getFormDocente() {
 		//vista formCarrera.html
 		ModelAndView modelView = new ModelAndView("formDocente");
-		modelView.addObject("nuevoDocente", nuevoDocente);	
+		modelView.addObject("nuevoDocente", nuevoDocenteDTO);	
 		modelView.addObject("flag", false);
 		return modelView;
 	}
 	
 	@PostMapping("/guardarDocente")
-	public ModelAndView saveDocente(@ModelAttribute("nuevoDocente") Docente docente) {
+	public ModelAndView saveDocente(@ModelAttribute("nuevoDocente") DocenteDTO docente) {
 
-		//ListadoDocentes.agregarDocente(docente);
+		
 		docenteService.guardarDocente(docente);
 		
 		ModelAndView modelView = new ModelAndView("listaDeDocentes");
