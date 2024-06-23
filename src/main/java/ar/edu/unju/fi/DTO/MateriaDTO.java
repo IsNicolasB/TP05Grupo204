@@ -2,7 +2,7 @@ package ar.edu.unju.fi.DTO;
 
 import org.springframework.stereotype.Component;
 
-import ar.edu.unju.fi.model.Carrera;
+import jakarta.persistence.ManyToOne;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -19,6 +19,8 @@ public class MateriaDTO {
 	private String curso;
 	private String modalidad;
 	private Boolean estado;
-//	private Docente docente;
-//	private Carrera carrera;
+	@ManyToOne
+	private CarreraDTO carrera;
+	@ManyToOne
+	private DocenteDTO docente;
 }

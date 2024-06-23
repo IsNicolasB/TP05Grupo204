@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
-import ar.edu.unju.fi.dto.AlumnoDTO;
+import ar.edu.unju.fi.DTO.AlumnoDTO;
 import ar.edu.unju.fi.service.AlumnoService;
 
 @Controller

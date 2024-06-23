@@ -10,6 +10,7 @@ import org.mapstruct.MappingConstants;
 import ar.edu.unju.fi.DTO.MateriaDTO;
 import ar.edu.unju.fi.model.Materia;
 
+
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface MateriaMapDTO {
 	
@@ -19,17 +20,12 @@ public interface MateriaMapDTO {
 	@Mapping(source="curso", target="curso")
 	@Mapping(source="estado", target="estado")
 	@Mapping(source="modalidad", target="modalidad")
-//	@Mapping(source="carrera", target="carrera")
+	@Mapping(source="carrera", target="carrera")
+	@Mapping(source="docente", target="docente")
 	MateriaDTO convertirMateriaAMateriaDTO(Materia m);
 	
 	@InheritInverseConfiguration
-/*	@Mapping(source="nombreDTO", target="nombre")
-	@Mapping(source="cantidadHorasDTO", target="cantidadHoras")
-	@Mapping(source="codigoDTO", target="codigo")
-	@Mapping(source="cursoDTO", target="curso")
-	@Mapping(source="estadoDTO", target="estado")
-	@Mapping(source="modalidadDTO", target="modalidad")
-*/	Materia convertirMateriaDTOAMateria(MateriaDTO m);
+	Materia convertirMateriaDTOAMateria(MateriaDTO m);
 	
 	List<MateriaDTO> convertirListaMateriaAListaMateriaDTO (List<Materia> listaM);
 	
