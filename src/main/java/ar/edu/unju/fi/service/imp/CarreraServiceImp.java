@@ -5,7 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import ar.edu.unju.fi.model.Carrera;
+import ar.edu.unju.fi.DTO.CarreraDTO;
+import ar.edu.unju.fi.map.CarreraMapDTO;
 import ar.edu.unju.fi.repository.CarreraRepository;
 import ar.edu.unju.fi.service.CarreraService;
 
@@ -15,37 +16,46 @@ public class CarreraServiceImp implements CarreraService{
 	@Autowired
 	CarreraRepository carreraRepository;
 	
+	@Autowired
+	CarreraMapDTO carreraMapDTO;
+	
 	@Override
-	public void guardarCarrera(Carrera carrera) {
-		if(!carreraRepository.existsById(carrera.getCodigo())) {
-			carreraRepository.save(carrera);
+	public void guardarCarrera(CarreraDTO carreraDTO) {
+		if(!carreraRepository.existsById(carreraDTO.getCodigo())) {
+			carreraRepository.save
+			(carreraMapDTO.convertirCarreraDTOACarrera(carreraDTO));
 		}
 	}
 
 	@Override
-	public List<Carrera> mostrarCarreras() {
-		return carreraRepository.findCarreraByEstado(true);
+	public List<CarreraDTO> mostrarCarreras() {
+		return carreraMapDTO.convertirListaCarrerasAListaCarrerasDTO
+				(carreraRepository.findCarreraByEstado(true)); 
 	}
 
 	@Override
 	public void borrarCarrera(String codigo) {
-		List<Carrera> carreras = carreraRepository.findAll();
-		carreras.forEach(carrera -> {
-			if(carrera.getCodigo().equals(codigo)) {
-				carrera.setEstado(false);
-				carreraRepository.save(carrera);
+		List<CarreraDTO> carrerasDTO = carreraMapDTO.
+		convertirListaCarrerasAListaCarrerasDTO(carreraRepository.findAll());
+		carrerasDTO.forEach(carreradto -> {
+			if(carreradto.getCodigo().equals(codigo)) {
+				carreradto.setEstado(false);
+				carreraRepository.save
+				(carreraMapDTO.convertirCarreraDTOACarrera(carreradto));
 			}
 		});
 	}
 
 	@Override
-	public Carrera buscarCarrera(String codigo) {
-		return carreraRepository.getReferenceById(codigo);
+	public CarreraDTO buscarCarrera(String codigo) {
+		return carreraMapDTO.convertirAcarreraDTO
+				(carreraRepository.getReferenceById(codigo)); 
 	}
 
 	@Override
-	public void modificarCarrera(Carrera carrera) {
-		carreraRepository.save(carrera);
+	public void modificarCarrera(CarreraDTO carreraDTO) {
+		carreraRepository.save
+		(carreraMapDTO.convertirCarreraDTOACarrera(carreraDTO));
 	}
 	
 }
