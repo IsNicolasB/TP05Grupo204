@@ -1,0 +1,38 @@
+package ar.edu.unju.fi.map;
+
+import java.util.List;
+
+import org.mapstruct.InheritInverseConfiguration;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.MappingConstants;
+
+import ar.edu.unju.fi.DTO.MateriaDTO;
+import ar.edu.unju.fi.model.Materia;
+
+@Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
+public interface MateriaMapDTO {
+	
+	@Mapping(source="nombre", target="nombre")
+	@Mapping(source="cantidadHoras", target="cantidadHoras")
+	@Mapping(source="codigo", target="codigo")
+	@Mapping(source="curso", target="curso")
+	@Mapping(source="estado", target="estado")
+	@Mapping(source="modalidad", target="modalidad")
+//	@Mapping(source="carrera", target="carrera")
+	MateriaDTO convertirMateriaAMateriaDTO(Materia m);
+	
+	@InheritInverseConfiguration
+/*	@Mapping(source="nombreDTO", target="nombre")
+	@Mapping(source="cantidadHorasDTO", target="cantidadHoras")
+	@Mapping(source="codigoDTO", target="codigo")
+	@Mapping(source="cursoDTO", target="curso")
+	@Mapping(source="estadoDTO", target="estado")
+	@Mapping(source="modalidadDTO", target="modalidad")
+*/	Materia convertirMateriaDTOAMateria(MateriaDTO m);
+	
+	List<MateriaDTO> convertirListaMateriaAListaMateriaDTO (List<Materia> listaM);
+	
+	List<Materia> convertirListaMateriaDTOAListaMateria (List<MateriaDTO> listaMDTO);
+	
+}
