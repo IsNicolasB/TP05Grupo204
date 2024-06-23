@@ -4,14 +4,15 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import ar.edu.unju.fi.DTO.MateriaDTO;
 import ar.edu.unju.fi.model.Materia;
 
 @Service
 public interface MateriaService {
 	
-	public void guardarMateria(Materia materia);
-	public List<Materia> mostrarMaterias();
+	public void guardarMateria(MateriaDTO materiaDTO);
+	public List<MateriaDTO> mostrarMaterias();
 	public void borrarMateria (String codigo);
-	public void modificarMateria (Materia materia);
-	public Materia buscarMateria(String codigo);
+	public void modificarMateria (MateriaDTO materia);
+	public MateriaDTO buscarMateria(String codigo);
 }

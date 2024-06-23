@@ -3,6 +3,7 @@ package ar.edu.unju.fi.model;
 import org.springframework.stereotype.Component;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import lombok.Data;
 
 @Data
@@ -17,7 +18,9 @@ public class Materia {
 	private int cantidadHoras;
 	private String modalidad;
 	private Boolean estado;
-//	private Docente docente;
-//	private Carrera carrera;
+	@ManyToOne
+	private Carrera carrera;
+	@ManyToOne
+	private Docente docente;
 	
 }

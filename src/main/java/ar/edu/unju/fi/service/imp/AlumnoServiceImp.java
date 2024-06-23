@@ -2,7 +2,7 @@ package ar.edu.unju.fi.service.imp;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ar.edu.unju.fi.dto.AlumnoDTO;
+import ar.edu.unju.fi.DTO.AlumnoDTO;
 import ar.edu.unju.fi.map.AlumnoMapDTO;
 import ar.edu.unju.fi.repository.AlumnoRepository;
 import ar.edu.unju.fi.service.AlumnoService;
