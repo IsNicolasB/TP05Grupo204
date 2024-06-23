@@ -6,13 +6,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
-import ar.edu.unju.fi.model.Alumno;
+import ar.edu.unju.fi.dto.AlumnoDTO;
 import ar.edu.unju.fi.service.AlumnoService;
 
 @Controller
 public class AlumnoController {
 	@Autowired
-	Alumno nuevoAlumno=new Alumno();
+	AlumnoDTO nuevoAlumnoDTO;
 	
 	@Autowired
 	AlumnoService alumnoService;
@@ -21,7 +21,7 @@ public class AlumnoController {
 	public ModelAndView getFormAlumno() {
 		
 		ModelAndView modelView = new ModelAndView("formAlumno");
-		modelView.addObject("nuevoAlumno", nuevoAlumno);	
+		modelView.addObject("nuevoAlumno", nuevoAlumnoDTO);	
 		modelView.addObject("flag", false);
 		return modelView;
 	}
@@ -36,9 +36,9 @@ public class AlumnoController {
 	}
 	
 	@PostMapping("/guardarAlumno")
-	public ModelAndView saveAlumno(@ModelAttribute("nuevoAlumno") Alumno alumnoParaGuardar) {
+	public ModelAndView saveAlumno(@ModelAttribute("nuevoAlumno") AlumnoDTO alumnoDTOParaGuardar) {
 					
-		alumnoService.guardarAlumno(alumnoParaGuardar);
+		alumnoService.guardarAlumno(alumnoDTOParaGuardar);
 		ModelAndView modelView = new ModelAndView("listaDeAlumnos");
 		modelView.addObject("listadoAlumnos", alumnoService.mostrarAlumnos());	
 		
@@ -57,16 +57,16 @@ public class AlumnoController {
 	
 	@GetMapping("/modificarAlumno/{lu}")
     public ModelAndView getFormModificarAlumno(@PathVariable(name="lu") String lu) {
-		Alumno alumno = alumnoService.buscarAlumno(lu);
+		AlumnoDTO alumnoDTO = alumnoService.buscarAlumno(lu);
         ModelAndView modelView = new ModelAndView("formAlumno");
-        modelView.addObject("nuevoAlumno", alumno);
+        modelView.addObject("nuevoAlumno", alumnoDTO);
         modelView.addObject("flag", true);
         return modelView;
     }
 
     @PostMapping("/modificarAlumno")
-    public ModelAndView modificarAlumno(@ModelAttribute("nuevoAlumno") Alumno alumnoModificado) {
-        alumnoService.modificarAlumno(alumnoModificado);
+    public ModelAndView modificarAlumno(@ModelAttribute("nuevoAlumno") AlumnoDTO alumnoDTOModificado) {
+        alumnoService.modificarAlumno(alumnoDTOModificado);
         ModelAndView modelView = new ModelAndView("listaDeAlumnos");
         modelView.addObject("listadoAlumnos", alumnoService.mostrarAlumnos());
         return modelView;
