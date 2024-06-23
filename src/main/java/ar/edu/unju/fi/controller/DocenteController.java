@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unju.fi.DTO.DocenteDTO;
-import ar.edu.unju.fi.model.Docente;
 import ar.edu.unju.fi.service.DocenteService;
 
 @Controller
@@ -52,7 +51,6 @@ public class DocenteController {
 	
 	@GetMapping("/borrarDocente/{legajo}")
 	public ModelAndView deleteDocenteDelListado(@PathVariable(name="legajo") String legajo) {
-		//borrar
 		//ListadoDocentes.eliminarDocente(legajo);
 		docenteService.borrarDocente(legajo);
 		ModelAndView modelView = new ModelAndView("listaDeDocentes");
@@ -63,16 +61,16 @@ public class DocenteController {
 	
 	@GetMapping("/modificarDocente/{legajo}")
     public ModelAndView getFormModificarDocente(@PathVariable(name="legajo") String legajo) {
-		Docente docente = docenteService.buscarDocente(legajo);
+		DocenteDTO docenteDTO = docenteService.buscarDocente(legajo);
         //ModelAndView modelView = new ModelAndView("modificarCarrera");
         ModelAndView modelView = new ModelAndView("formDocente");
-        modelView.addObject("nuevoDocente", docente);
+        modelView.addObject("nuevoDocente", docenteDTO);
         modelView.addObject("flag", true);
         return modelView;
     }
 
     @PostMapping("/modificarDocente")
-    public ModelAndView modificarDocente(@ModelAttribute("nuevoDocente") Docente docenteModificado) {
+    public ModelAndView modificarDocente(@ModelAttribute("nuevoDocente") DocenteDTO docenteModificado) {
         docenteService.modificarDocente(docenteModificado);
         ModelAndView modelView = new ModelAndView("listaDeDocentes");
         modelView.addObject("listadoDocentes", docenteService.mostrarDocentes());
