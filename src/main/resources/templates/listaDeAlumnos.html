@@ -26,8 +26,6 @@
 					<th scope="col">Apellido</th>
 					<th scope="col">Email</th>
 					<th scope="col">Telefono</th>
-					<th scope="col">Fecha Nacimiento</th>
-					<th scope="col">Domicilio</th>
 					<th scope="col">Edición</th>
 				</tr>
 			</thead>
@@ -39,8 +37,6 @@
 					<td data-th-text="${alumno.apellido}"></td>
 					<td data-th-text="${alumno.email}"></td>
 					<td data-th-text="${alumno.telefono}"></td>
-					<td data-th-text="${alumno.fechaNacimiento}"></td>
-					<td data-th-text="${alumno.domicilio}"></td>
 					<td>
 						<a data-th-href="@{'/borrarAlumno/'+${alumno.lu}}" class="btn btn-danger">Borrar</a>
 						<a data-th-href="@{'/modificarAlumno/'+${alumno.lu}}" class="btn btn-warning">Modificar</a>

@@ -23,36 +23,63 @@
 				<div class="row">
 					<div class="col-sm-6">
 						<label for="lu" class="form-label mt-1">Libreta Universitaria</label>
-						<input type="text" class="form-control" id="lu" data-th-field="*{lu}" data-th-readonly="${flag}" required>
+						<input type="text" class="form-control" id="lu" data-th-field="*{lu}" placeholder="Libreta Universitaria"
+						data-th-readonly="${flag}" data-th-classappend="${#fields.hasErrors('lu')} ? 'is-invalid' : ''">
+						<p class="form-text text-danger" data-th-if="${#fields.hasErrors('lu')}" 
+						data-th-errors="*{lu}"></p>
 						
 						<label for="dni" class="form-label mt-1">DNI</label>
-						<input type="text" class="form-control" id="dni" data-th-field="*{dni}" required>
+						<input type="text" class="form-control" id="dni" data-th-field="*{dni}" placeholder="DNI"
+						data-th-classappend="${#fields.hasErrors('dni')} ? 'is-invalid' : ''">
+						<p class="form-text text-danger" data-th-if="${#fields.hasErrors('dni')}" 
+						data-th-errors="*{dni}"></p>
 
 						<label for="nombre" class="form-label mt-1">Nombre</label>
-						<input type="text" class="form-control" id="nombre" data-th-field="*{nombre}" required>
+						<input type="text" class="form-control" id="nombre" data-th-field="*{nombre}" placeholder="Nombre del Alumno"
+						data-th-classappend="${#fields.hasErrors('nombre')} ? 'is-invalid' : ''">
+						<p class="form-text text-danger" data-th-if="${#fields.hasErrors('nombre')}" 
+						data-th-errors="*{nombre}"></p>
 
 						<label for="apellido" class="form-label mt-1">Apellido</label>
-						<input type="text" class="form-control" id="apellido" data-th-field="*{apellido}" required>
+						<input type="text" class="form-control" id="apellido" data-th-field="*{apellido}" placeholder="Apellido del Alumno"
+						data-th-classappend="${#fields.hasErrors('apellido')} ? 'is-invalid' : ''">
+						<p class="form-text text-danger" data-th-if="${#fields.hasErrors('apellido')}" 
+						data-th-errors="*{apellido}"></p>
 
 						<label for="email" class="form-label mt-1">Email</label>
-						<input type="email" class="form-control" id="email" data-th-field="*{email}" required>
+						<input type="email" class="form-control" id="email" data-th-field="*{email}" placeholder="Email del Alumno"
+						data-th-classappend="${#fields.hasErrors('email')} ? 'is-invalid' : ''">
+						<p class="form-text text-danger" data-th-if="${#fields.hasErrors('email')}" 
+						data-th-errors="*{email}"></p>
 
 					</div>
 					<div class="col-sm-6">
 						<label for="telefono" class="form-label mt-1">Telefono</label>
-						<input type="text" class="form-control" id="telefono" data-th-field="*{telefono}" maxlength="10" minlength="8" required>
+						<input type="text" class="form-control" id="telefono" data-th-field="*{telefono}" placeholder="Telefono Fijo"
+						data-th-classappend="${#fields.hasErrors('telefono')} ? 'is-invalid' : ''">
+						<p class="form-text text-danger" data-th-if="${#fields.hasErrors('telefono')}" 
+						data-th-errors="*{telefono}"></p>
 
 						<label for="fechaNacimiento" class="form-label mt-1">Fecha de Nacimiento</label>
-						<input type="date" class="form-control" id="fechaNacimiento" data-th-field="*{fechaNacimiento}" required>
+						<input type="date" class="form-control" id="fechaNacimiento" data-th-field="*{fechaNacimiento}" placeholder="Fecha de Nacimiento del Alumno"
+						data-th-classappend="${#fields.hasErrors('fechaNacimiento')} ? 'is-invalid' : ''">
+						<p class="form-text text-danger" data-th-if="${#fields.hasErrors('fechaNacimiento')}" 
+						data-th-errors="*{fechaNacimiento}"></p>
 
 						<label for="domicilio" class="form-label mt-1">Domicilio</label>
-						<input type="text" class="form-control" id="domicilio" data-th-field="*{domicilio}" required>
+						<input type="text" class="form-control" id="domicilio" data-th-field="*{domicilio}" placeholder="Domicilio Actual"
+						data-th-classappend="${#fields.hasErrors('domicilio')} ? 'is-invalid' : ''">
+						<p class="form-text text-danger" data-th-if="${#fields.hasErrors('domicilio')}" 
+						data-th-errors="*{domicilio}"></p>
 
 						<label for="estadoAlumno" class="form-label mt-1">Estado</label>
-						<select id="estadoAlumno" data-th-field="*{estado}" class="form-select" required>
-							<option value=true>True</option>
+						<select id="estadoAlumno" data-th-field="*{estado}" class="form-select"
+						data-th-classappend="${#fields.hasErrors('estado')} ? 'is-invalid' : ''">
+							<option value=true selected>True</option>
 							<option value=false>False</option>
 						</select>
+						<p class="form-text text-danger" data-th-if="${#fields.hasErrors('estado')}" 
+						data-th-errors="*{estado}"></p>
 					</div>
 				</div>
 				<button type="submit" class="btn btn-primary mt-2 mb-3">Guardar Alumno</button>

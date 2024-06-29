@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ar.edu.unju.fi.dto.AlumnoDTO;
 import ar.edu.unju.fi.map.AlumnoMapDTO;
+import ar.edu.unju.fi.model.Alumno;
 import ar.edu.unju.fi.repository.AlumnoRepository;
 import ar.edu.unju.fi.service.AlumnoService;
 
@@ -16,11 +17,10 @@ public class AlumnoServiceImp implements AlumnoService{
 	AlumnoMapDTO alumnoMapDTO;
 
 	@Override
-	public void guardarAlumno(AlumnoDTO alumnoDTO) {
-		if(!alumnoRepository.existsById(alumnoDTO.getLu())) {
+	public void guardarAlumno(Alumno alumno) {
+		if(!alumnoRepository.existsById(alumno.getLu())) {
 			//alumno.setEstado(true);
-			alumnoRepository.save(
-			alumnoMapDTO.convertirAlumnoDTOAAlumno(alumnoDTO));
+			alumnoRepository.save(alumno);
 		}
 	}
 
@@ -32,17 +32,16 @@ public class AlumnoServiceImp implements AlumnoService{
 
 	@Override
 	public void borrarAlumno(String lu) {
-		List<AlumnoDTO> alumnosDTO = alumnoMapDTO.convertirListaAlumnosAListaAlumnosDTO(alumnoRepository.findAll());
-		alumnosDTO.forEach(adto -> {
-			if(adto.getLu().equals(lu)) {
-				adto.setEstado(false);
-				alumnoRepository.save(alumnoMapDTO.convertirAlumnoDTOAAlumno(adto));
+		alumnoRepository.findAll().forEach(a -> {
+			if(a.getLu().equals(lu)) {
+				a.setEstado(false);
+				alumnoRepository.save(a);
 			}
 		});
 	}
 
 	@Override
-	public void modificarAlumno(AlumnoDTO alumnoDTOModificado) {
+	public void modificarAlumno(Alumno alumnoModificado) {
 //		int i=0;
 //		List<Alumno> alumnos = alumnoRepository.findAll();
 //		for (Alumno alumno : alumnos) {
@@ -51,12 +50,12 @@ public class AlumnoServiceImp implements AlumnoService{
 //			}
 //			i++;
 //		}
-		alumnoRepository.save(alumnoMapDTO.convertirAlumnoDTOAAlumno(alumnoDTOModificado));
+		alumnoRepository.save(alumnoModificado);
 	}
 
 	@Override
-	public AlumnoDTO buscarAlumno(String lu) {
-		return alumnoMapDTO.convertirAlumnoAAlumnoDTO(alumnoRepository.getReferenceById(lu)); 
+	public Alumno buscarAlumno(String lu) {
+		return alumnoRepository.getReferenceById(lu); 
 	}
 	
 }
