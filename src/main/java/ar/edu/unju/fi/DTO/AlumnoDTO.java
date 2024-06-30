@@ -15,7 +15,5 @@ public class AlumnoDTO {
 	private String apellido;
 	private String email;
 	private String telefono;
-	private String fechaNacimiento;
-	private String domicilio;
 	private Boolean estado;
 }
