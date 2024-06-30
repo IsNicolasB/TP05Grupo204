@@ -23,6 +23,8 @@
  					<th scope="col">Codigo</th> 
 					<th scope="col">Nombre</th>
 					<th scope="col">Cantidad de Años</th>
+					<th scope="col">Cantidad de Alumnos</th>
+					<th scope="col">Cantidad de Materias</th>
 <!-- 					<th scope="col">Estado</th> -->
 					<th scope="col">Edición</th>
 				</tr>
@@ -32,6 +34,8 @@
 				 	<td data-th-text="${carrera.codigo}"></td> 
 					<td data-th-text="${carrera.nombre}"></td>
 					<td data-th-text="${carrera.duracion}"></td>
+					<td data-th-text="${carrera.alumnos.size()}"></td>				
+					<td data-th-text="${carrera.materias.size()}"></td>
 <!-- 					<td data-th-text="${carrera.estado}"></td> -->
 					<td>
 						<a data-th-href="@{'/borrarCarrera/'+${carrera.codigo}}" class="btn btn-danger">Borrar</a>
@@ -41,6 +45,12 @@
 				</tr>
 			</tbody>
 		</table>
+		<div class="alert alert-danger d-flex align-items-center" role="alert" data-th-if=${errors}>
+		  <svg class="bi flex-shrink-0 me-2" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+		  <div>
+		    An example danger alert with an icon
+		  </div>
+		</div>	
 		<br>
 	</section>
 	<footer>

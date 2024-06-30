@@ -1,23 +1,24 @@
 package ar.edu.unju.fi.model;
 
+import java.util.List;
+
 import org.springframework.stereotype.Component;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-
+@Data
 @Component
-@Getter
-@Setter
 @Entity
 public class Carrera {
 	@Id
@@ -35,4 +36,10 @@ public class Carrera {
 	
 	@NotNull(message="Ingrese el Estado del Alumno")
 	private Boolean estado;
+	
+	@OneToMany(mappedBy="carrera", cascade=CascadeType.ALL)
+	private List<Alumno> alumnos;
+	
+	@OneToMany(mappedBy="carrera", cascade=CascadeType.ALL)
+	private List<Materia> materias;
 }
