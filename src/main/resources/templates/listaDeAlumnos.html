@@ -27,6 +27,7 @@
 					<th scope="col">Email</th>
 					<th scope="col">Telefono</th>
 					<th scope="col">Carrera</th>
+					<th scope="col">Materias</th>
 					<th scope="col">Edición</th>
 				</tr>
 			</thead>
@@ -38,7 +39,8 @@
 					<td data-th-text="${alumno.apellido}"></td>
 					<td data-th-text="${alumno.email}"></td>
 					<td data-th-text="${alumno.telefono}"></td>
-					<td data-th-text="${alumno.carrera.nombre}"></td>
+					<td data-th-text="${alumno.carrera != null ? alumno.carrera.getNombre() : 'Sin Carrera'}"></td>
+					<td data-th-text="${alumno.materias != null ? alumno.carrera.size() : 'Sin Materias'}"></td>
 					<td>
 						<a data-th-href="@{'/borrarAlumno/'+${alumno.lu}}" class="btn btn-danger">Borrar</a>
 						<a data-th-href="@{'/modificarAlumno/'+${alumno.lu}}" class="btn btn-warning">Modificar</a>

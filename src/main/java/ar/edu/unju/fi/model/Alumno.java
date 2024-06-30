@@ -51,12 +51,11 @@ public class Alumno {
 	@NotBlank(message="Ingrese el Domicilio actual")
 	@Size(max=60, message="Domicilio muy largo")
 	private String domicilio;
-	@NotNull(message="Ingrese una carrera")
 	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
-	@JoinColumn(name="codigoCarrera")
+	@JoinColumn(name="codigo")
 	private Carrera carrera;
 	@ManyToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
-	@JoinTable(name="alumnos_materias")
+	@JoinTable(name="alumno_materias")
 	private List<Materia> materias;
 	@NotNull(message="Ingrese el Estado del Alumno")
 	private boolean estado;
