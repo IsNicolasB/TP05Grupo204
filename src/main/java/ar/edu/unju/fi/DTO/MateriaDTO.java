@@ -19,8 +19,6 @@ public class MateriaDTO {
 	private String codigo;
 	private String nombre;
 	private String curso;
-	@ManyToMany
-	private Alumno Alumnos;
 	@OneToOne
 	private Docente docente;
 }
