@@ -14,6 +14,7 @@ import ar.edu.unju.fi.model.Materia;
 import ar.edu.unju.fi.service.MateriaService;
 import jakarta.validation.Valid;
 import ar.edu.unju.fi.service.DocenteService;
+import ar.edu.unju.fi.service.AlumnoService;
 import ar.edu.unju.fi.service.CarreraService;
 
 @Controller
@@ -27,6 +28,9 @@ public class MateriaController {
     
     @Autowired
     DocenteService docenteService;
+    
+    @Autowired
+    AlumnoService alumnoService;
     
     @GetMapping("/formularioMaterias")
     public ModelAndView getFormMateria() {

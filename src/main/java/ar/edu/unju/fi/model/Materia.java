@@ -6,11 +6,14 @@ import java.util.List;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
@@ -54,5 +57,8 @@ public class Materia implements Serializable{
 	@NotNull(message= "Elija un docente para la materia")
 	@JoinColumn(name = "m_leg", referencedColumnName = "legajo")
 	private Docente docente;
+	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	@JoinColumn(name="codigoCarrera")
+	Carrera carrera;
 	
 }
