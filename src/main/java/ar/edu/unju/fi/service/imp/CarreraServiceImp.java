@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import ar.edu.unju.fi.DTO.CarreraDTO;
 import ar.edu.unju.fi.map.CarreraMapDTO;
+import ar.edu.unju.fi.model.Carrera;
 import ar.edu.unju.fi.repository.CarreraRepository;
 import ar.edu.unju.fi.service.CarreraService;
 
@@ -20,11 +21,8 @@ public class CarreraServiceImp implements CarreraService{
 	CarreraMapDTO carreraMapDTO;
 	
 	@Override
-	public void guardarCarrera(CarreraDTO carreraDTO) {
-		if(!carreraRepository.existsById(carreraDTO.getCodigo())) {
-			carreraRepository.save
-			(carreraMapDTO.convertirCarreraDTOACarrera(carreraDTO));
-		}
+	public void guardarCarrera(Carrera carrera) {
+		carreraRepository.save(carrera);
 	}
 
 	@Override
@@ -35,27 +33,23 @@ public class CarreraServiceImp implements CarreraService{
 
 	@Override
 	public void borrarCarrera(String codigo) {
-		List<CarreraDTO> carrerasDTO = carreraMapDTO.
-		convertirListaCarrerasAListaCarrerasDTO(carreraRepository.findAll());
-		carrerasDTO.forEach(carreradto -> {
-			if(carreradto.getCodigo().equals(codigo)) {
-				carreradto.setEstado(false);
-				carreraRepository.save
-				(carreraMapDTO.convertirCarreraDTOACarrera(carreradto));
+		List<Carrera> carreras = carreraRepository.findAll();
+		carreras.forEach(carrera -> {
+			if(carrera.getCodigo().equals(Integer.parseInt(codigo))) {
+				carrera.setEstado(false);
+				carreraRepository.save(carrera);
 			}
 		});
 	}
 
 	@Override
-	public CarreraDTO buscarCarrera(String codigo) {
-		return carreraMapDTO.convertirAcarreraDTO
-				(carreraRepository.getReferenceById(codigo)); 
+	public Carrera buscarCarrera(Integer codigo) {
+		return carreraRepository.getReferenceById(codigo);
 	}
 
 	@Override
-	public void modificarCarrera(CarreraDTO carreraDTO) {
-		carreraRepository.save
-		(carreraMapDTO.convertirCarreraDTOACarrera(carreraDTO));
+	public void modificarCarrera(Carrera carrera) {
+		carreraRepository.save(carrera);
 	}
 	
 }
