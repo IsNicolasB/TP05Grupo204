@@ -3,16 +3,36 @@ package ar.edu.unju.fi.model;
 import org.springframework.stereotype.Component;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import lombok.Data;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+
 @Component
+@Getter
+@Setter
 @Entity
 public class Carrera {
 	@Id
-	private String codigo;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer codigo;
+	
+	@NotBlank(message="Ingrese el Nombre")
+	@Size(min=3, max= 60,message="El Nombre debe tener entre 3 y 60 caracteres")
 	private String nombre;
+	
+	@NotNull(message="Ingrese la Duración de la Carrera")
+	@Min(value = 3 , message="La duracion debe ser mayor a 3 y menor a 6")
+	@Max(value = 6 , message="La duracion debe ser menor a 3 y menor a 6")
 	private Integer duracion;
+	
+	@NotNull(message="Ingrese el Estado del Alumno")
 	private Boolean estado;
 }
