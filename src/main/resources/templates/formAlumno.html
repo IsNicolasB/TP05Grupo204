@@ -72,6 +72,12 @@
 						<p class="form-text text-danger" data-th-if="${#fields.hasErrors('domicilio')}" 
 						data-th-errors="*{domicilio}"></p>
 
+						<label class="form-label">Carrera</label>
+	            		<select data-th-field="*{carrera}" class="form-control">
+	                		<option value="">Seleccionar carrera...</option>
+	                		<option data-th-each="c : ${carreras}" data-th-value="${c.codigo}" data-th-text="${c.nombre + ' ' + c.duracion}"></option>
+	            		</select>
+
 						<label for="estadoAlumno" class="form-label mt-1">Estado</label>
 						<select id="estadoAlumno" data-th-field="*{estado}" class="form-select"
 						data-th-classappend="${#fields.hasErrors('estado')} ? 'is-invalid' : ''">

@@ -17,10 +17,13 @@ public class AlumnoServiceImp implements AlumnoService{
 	AlumnoMapDTO alumnoMapDTO;
 
 	@Override
-	public void guardarAlumno(Alumno alumno) {
+	public boolean guardarAlumno(Alumno alumno) {
 		if(!alumnoRepository.existsById(alumno.getLu())) {
 			//alumno.setEstado(true);
 			alumnoRepository.save(alumno);
+			return false;
+		}else {
+			return true;
 		}
 	}
 
