@@ -20,11 +20,11 @@ public interface CarreraMapDTO {
 	//@Mapping(source="estado", target="estado")
 	CarreraDTO convertirAcarreraDTO(Carrera carrera);
 	
-	@Mapping(target = "estado", ignore = true)
+	/*@Mapping(target = "estado", ignore = true)
 	@InheritInverseConfiguration
-	Carrera convertirCarreraDTOACarrera (CarreraDTO carreradto);
+	Carrera convertirCarreraDTOACarrera (CarreraDTO carreradto);*/
 
 	List<CarreraDTO> convertirListaCarrerasAListaCarrerasDTO (List<Carrera> listaCarrera);
 
-	List<Carrera> convertirListaCarrerasDTOAListaCarrerass (List<CarreraDTO> listaCarreraDTO);
+	//List<Carrera> convertirListaCarrerasDTOAListaCarrerass (List<CarreraDTO> listaCarreraDTO);
 }

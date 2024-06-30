@@ -11,7 +11,7 @@ import ar.edu.unju.fi.model.Carrera;
 public interface CarreraService{
 	public void guardarCarrera(Carrera carrera);
 	public List<CarreraDTO> mostrarCarreras();
-	public void borrarCarrera(String codigo);
+	public void borrarCarrera(Integer codigo);
 	public Carrera buscarCarrera(Integer codigo);
 	public void modificarCarrera(Carrera carrera);
 }
