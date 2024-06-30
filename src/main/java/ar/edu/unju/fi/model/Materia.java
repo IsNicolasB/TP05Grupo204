@@ -1,10 +1,19 @@
 package ar.edu.unju.fi.model;
 
+import java.io.Serializable;
+import java.util.List;
+
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;
+
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
@@ -18,9 +27,10 @@ import lombok.Data;
 @Data
 @Component
 @Entity
-public class Materia {
+public class Materia implements Serializable{
 	
 	@Id
+	@Column(name = "m_materia")
 	private String codigo;
 	@NotBlank(message="Debe ingresar un nombre para la materia")
 	@Size(min=3, max=20, message="El nombre de la materia debe contener minimo 3 caracteres y maximo 20")
@@ -39,9 +49,16 @@ public class Materia {
 	private String modalidad;
 	@NotNull(message= "Eliga un estado para la materia")
 	private Boolean estado;
-	//@ManyToMany
-	//private Alumno Alumnos;
+	
+	@ManyToMany (mappedBy= "materias")
+	private List<Alumno> Alumnos;
+	
 	@OneToOne
+	@NotNull(message= "Elija un docente para la materia")
+	@JoinColumn(name = "m_leg", referencedColumnName = "legajo")
 	private Docente docente;
+	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	@JoinColumn(name="codigoCarrera")
+	Carrera carrera;
 	
 }
