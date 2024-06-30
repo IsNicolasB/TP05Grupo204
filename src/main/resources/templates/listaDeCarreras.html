@@ -47,9 +47,7 @@
 		</table>
 		<div class="alert alert-danger d-flex align-items-center" role="alert" data-th-if=${errors}>
 		  <svg class="bi flex-shrink-0 me-2" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
-		  <div>
-		    An example danger alert with an icon
-		  </div>
+		  <div data-th-text="${cargaCarreraErrorMessage}"></div>
 		</div>	
 		<br>
 	</section>
