@@ -50,12 +50,12 @@ public class Materia implements Serializable{
 	@NotNull(message= "Eliga un estado para la materia")
 	private Boolean estado;
 	
-	@ManyToMany (mappedBy= "materias")
+	@ManyToMany (mappedBy= "alumnos_materias")
 	private List<Alumno> Alumnos;
 	
 	@OneToOne
 	@NotNull(message= "Elija un docente para la materia")
-	@JoinColumn(name = "m_leg", referencedColumnName = "legajo")
+	@JoinColumn(name = "m_leg", referencedColumnName = "legajo", unique=true)
 	private Docente docente;
 	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
 	@JoinColumn(name="codigoCarrera")
