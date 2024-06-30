@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unju.fi.model.Carrera;
+import ar.edu.unju.fi.service.AlumnoService;
 import ar.edu.unju.fi.service.CarreraService;
+import ar.edu.unju.fi.service.MateriaService;
 import jakarta.validation.Valid;
 
 @Controller
@@ -20,6 +22,12 @@ public class CarreraController {
 	
 	@Autowired
 	CarreraService carreraService;
+	
+	@Autowired
+	AlumnoService alumnoService;
+	
+	@Autowired
+	MateriaService materiaService;
 	
 	@GetMapping("/formularioCarrera")
 	public ModelAndView getFormCarrera() {
@@ -31,6 +39,10 @@ public class CarreraController {
 	
 	@PostMapping("/guardarCarrera")
 	public ModelAndView saveCarrera(@Valid @ModelAttribute("nuevaCarrera") Carrera carreraParaGuardar, BindingResult resultado) {
+		
+		carreraParaGuardar.getAlumnos().forEach( a -> a.setCarrera(carreraParaGuardar));
+		carreraParaGuardar.getMaterias().forEach( m -> m.setCarrera(carreraParaGuardar));
+		
 		ModelAndView modelView = new ModelAndView();
 		
 		if (resultado.hasErrors()) {
@@ -38,10 +50,17 @@ public class CarreraController {
 			modelView.addObject("flag", false);
 		}
 		else {
-			carreraService.guardarCarrera(carreraParaGuardar);
+			try {
+				carreraService.guardarCarrera(carreraParaGuardar);	
+			}catch(Exception e) {			
+				modelView.addObject("errors", true);
+				modelView.addObject("cargaCarreraErrorMessage", "Error al cargar en la BD" + e.getMessage());
+				System.out.println(e.getMessage());
+			}
 			modelView.setViewName("listaDeCarreras");
 			modelView.addObject("listadoCarreras", carreraService.mostrarCarreras());	
 		}
+		
 		return modelView;
 	}
 	
@@ -75,6 +94,9 @@ public class CarreraController {
 	  @PostMapping("/modificarCarrera")
 	    public ModelAndView modificarCarrera(@Valid @ModelAttribute("nuevaCarrera") Carrera carreraModificada, BindingResult resultado) {
 	    	
+		  	carreraModificada.getAlumnos().forEach( a -> a.setCarrera(carreraModificada));
+			carreraModificada.getMaterias().forEach( m -> m.setCarrera(carreraModificada));
+		  
 		  	ModelAndView modelView = new ModelAndView();
 			
 			if (resultado.hasErrors()) {
@@ -82,7 +104,13 @@ public class CarreraController {
 				modelView.addObject("flag", true);
 			}
 			else {
-				carreraService.modificarCarrera(carreraModificada);
+				try {
+					carreraService.guardarCarrera(carreraModificada);	
+				}catch(Exception e) {			
+					modelView.addObject("errors", true);
+					modelView.addObject("cargaCarreraErrorMessage", "Error al cargar en la BD" + e.getMessage());
+					System.out.println(e.getMessage());
+				}
 				modelView.setViewName("listaDeCarreras");
 				modelView.addObject("listadoCarreras", carreraService.mostrarCarreras());	
 			}

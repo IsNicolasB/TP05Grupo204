@@ -26,6 +26,7 @@
 					<th scope="col">Apellido</th>
 					<th scope="col">Email</th>
 					<th scope="col">Telefono</th>
+					<th scope="col">Carrera</th>
 					<th scope="col">Edición</th>
 				</tr>
 			</thead>
@@ -37,6 +38,7 @@
 					<td data-th-text="${alumno.apellido}"></td>
 					<td data-th-text="${alumno.email}"></td>
 					<td data-th-text="${alumno.telefono}"></td>
+					<td data-th-text="${alumno.carrera.nombre}"></td>
 					<td>
 						<a data-th-href="@{'/borrarAlumno/'+${alumno.lu}}" class="btn btn-danger">Borrar</a>
 						<a data-th-href="@{'/modificarAlumno/'+${alumno.lu}}" class="btn btn-warning">Modificar</a>
@@ -45,6 +47,7 @@
 			</tbody>
 		</table>
 		<br>
+		<p class="text-danger text-center p-2" data-th-if="${saved}">El alumno que ha ingresado no se ha cargado debido a que su LU ya pertenece a otro Alumno</p><br>
 	</section>
 
 	<footer>
