@@ -22,7 +22,7 @@
 				<tr>
 					<th scope="col">Codigo</th>
 					<th scope="col">Nombre</th>
-					<th scope="col">Cantidad</th>
+					<th scope="col">Cantidad de Años</th>
 					<th scope="col">Estado</th>
 					<th scope="col">Edición</th>
 				</tr>
@@ -31,7 +31,7 @@
 				<tr data-th-each="carrera : ${listadoCarreras}">
 					<td data-th-text="${carrera.codigo}"></td>
 					<td data-th-text="${carrera.nombre}"></td>
-					<td data-th-text="${carrera.cantAños}"></td>
+					<td data-th-text="${carrera.duracion}"></td>
 					<td data-th-text="${carrera.estado}"></td>
 					<td>
 						<a data-th-href="@{'/borrarCarrera/'+${carrera.codigo}}" class="btn btn-danger">Borrar</a>

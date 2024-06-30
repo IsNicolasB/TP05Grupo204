@@ -30,7 +30,10 @@
 
 						<label for="email" class="form-label mt-1">Email</label>
 						<input type="email" class="form-control" id="email" data-th-field="*{email}" required>
-
+						
+						<label for="telefono" class="form-label mt-1">Telefono</label>
+						<input type="text" class="form-control" id="telefono" data-th-field="*{telefono}" maxlength="10"
+							minlength="10" required>
 					</div>
 					<div class="col-sm-6">
 						<label for="nombre" class="form-label mt-1">Nombre</label>
@@ -38,13 +41,13 @@
 
 						<label for="apellido" class="form-label mt-1">Apellido</label>
 						<input type="text" class="form-control" id="apellido" data-th-field="*{apellido}" required>
+					
+						<label class="form-label" for="estado">Estado</label>
+						<select data-th-field="*{estado}" class="form-control" required>
+						<option data-th-value="true">True</option>
+						<option data-th-value="false">False</option>
+						</select>
 					</div>
-					<div class="col-sm-6  text-center">
-						<label for="telefono" class="form-label mt-1">Telefono</label>
-						<input type="text" class="form-control" id="telefono" data-th-field="*{telefono}" maxlength="10"
-							minlength="10" required>
-					</div>
-
 				</div>
 
 				<button type="submit" class="btn btn-primary mt-2 mb-3">Guardar Docente</button>

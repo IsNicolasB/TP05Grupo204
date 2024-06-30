@@ -5,7 +5,6 @@ import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;
-
 import ar.edu.unju.fi.DTO.AlumnoDTO;
 import ar.edu.unju.fi.model.Alumno;
 
