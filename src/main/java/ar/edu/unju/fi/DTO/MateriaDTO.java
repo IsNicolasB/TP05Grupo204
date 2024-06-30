@@ -2,7 +2,10 @@ package ar.edu.unju.fi.DTO;
 
 import org.springframework.stereotype.Component;
 
-import jakarta.persistence.ManyToOne;
+import ar.edu.unju.fi.model.Alumno;
+import ar.edu.unju.fi.model.Docente;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToOne;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -13,14 +16,11 @@ import lombok.Setter;
 @Component
 public class MateriaDTO {
 	
-	private String nombre;
-	private int cantidadHoras;
 	private String codigo;
+	private String nombre;
 	private String curso;
-	private String modalidad;
-	private Boolean estado;
-	@ManyToOne
-	private CarreraDTO carrera;
-	@ManyToOne
-	private DocenteDTO docente;
+	@ManyToMany
+	private Alumno Alumnos;
+	@OneToOne
+	private Docente docente;
 }
