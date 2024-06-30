@@ -8,6 +8,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.Email;
@@ -50,11 +51,12 @@ public class Alumno {
 	@NotBlank(message="Ingrese el Domicilio actual")
 	@Size(max=60, message="Domicilio muy largo")
 	private String domicilio;
+	@NotNull(message="Ingrese una carrera")
 	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
 	@JoinColumn(name="codigoCarrera")
 	private Carrera carrera;
 	@ManyToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
-	@JoinColumn(name="materias")
+	@JoinTable(name="alumnos_materias")
 	private List<Materia> materias;
 	@NotNull(message="Ingrese el Estado del Alumno")
 	private boolean estado;
