@@ -28,13 +28,16 @@
 
                         <label for="nombre" class="form-label mt-1">Nombre</label>
                         <input type="text" class="form-control" id="nombre" data-th-field="*{nombre}" required>
+                        <p class="form-text text-danger" data-th-if="${#fields.hasErrors('nombre')}" data-th-errors="*{nombre}"></p>
                     </div>
                     <div class="col-sm-6">
                         <label for="curso" class="form-label mt-1">Curso</label>
                         <input type="text" class="form-control" id="curso" data-th-field="*{curso}" required>
+                        <p class="form-text text-danger" data-th-if="${#fields.hasErrors('curso')}" data-th-errors="*{curso}"></p>
 
                         <label for="horas" class="form-label mt-1">Horas</label>
                         <input type="number" class="form-control" id="horas" data-th-field="*{cantidadHoras}">
+                        <p class="form-text text-danger" data-th-if="${#fields.hasErrors('cantidadHoras')}" data-th-errors="*{cantidadHoras}"></p>
                     </div>
                     <div class="col-sm-6">
                         <label for="estadoMateria" class="form-label mt-1">Estado</label><br>
@@ -42,6 +45,7 @@
                             <option value="true">True</option>
                             <option value="false">False</option>
                         </select>
+                        <p class="form-text text-danger" data-th-if="${#fields.hasErrors('estado')}" data-th-errors="*{estado}"></p>
                     </div>
                     <div class="col-sm-6 text-center">
                         <label for="modalidad" class="form-label mt-1">Modalidad</label><br>
@@ -50,22 +54,16 @@
                             <option value="Presencial">Presencial</option>
                             <option value="Virtual">Virtual</option>
                         </select>
+                        <p class="form-text text-danger" data-th-if="${#fields.hasErrors('modalidad')}" data-th-errors="*{modalidad}"></p>
                     </div>
                     <div class="col-sm-6 text-center">
                         <label for="docente" class="form-label mt-1">Docente</label><br>
-                        <select class="form-select text-center" id="docente" data-th-field="*{docente.legajo}">
+                        <select class="form-select text-center" id="docente" data-th-field="*{docente.legajo}" required>
                             <option value="">Seleccionar Docente</option>
                             <option data-th-each="d : ${listadoDocentes}" data-th-value="${d.legajo}"
                                 data-th-text="${d.apellido}"></option>
                         </select>
-                    </div>
-                    <div class="col-sm-6 text-center">
-                        <label for="carrera" class="form-label mt-1">Carrera</label><br>
-                        <select class="form-select text-center" id="carrera" data-th-field="*{carrera.codigo}" required>
-                            <option value="">Seleccionar Carrera</option>
-                            <option data-th-each="c : ${listadoCarreras}" data-th-value="${c.codigo}"
-                                data-th-text="${c.nombre}"></option>
-                        </select>
+                        <p class="form-text text-danger" data-th-if="${#fields.hasErrors('docente')}" data-th-errors="*{docente}"></p>
                     </div>
                 </div>
                 <button type="submit" class="btn btn-primary mt-2 mb-3">Guardar Materia</button>

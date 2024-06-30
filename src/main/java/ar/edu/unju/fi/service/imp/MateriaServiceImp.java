@@ -21,14 +21,13 @@ public class MateriaServiceImp implements MateriaService{
 	MateriaMapDTO materiaMapDto;
 	
 	@Override
-	public void guardarMateria(MateriaDTO materiaDTO) {
+	public void guardarMateria(Materia materia) {
 		// TODO Auto-generated method stub
 		
 		
 		
-		if (!materiaRepository.existsById(materiaDTO.getCodigo())) {
-			materiaRepository.save(
-			materiaMapDto.convertirMateriaDTOAMateria(materiaDTO));
+		if (!materiaRepository.existsById(materia.getCodigo())) {
+			materiaRepository.save(materia);
 		}
 	}
 
@@ -41,20 +40,20 @@ public class MateriaServiceImp implements MateriaService{
 
 	@Override
 	public void borrarMateria(String codigo) {
-		List<MateriaDTO> materias = materiaMapDto.convertirListaMateriaAListaMateriaDTO(materiaRepository.findAll());
+		List<Materia> materias = materiaRepository.findAll();
 		materias.forEach(materia -> {
 			if(materia.getCodigo().equals(codigo)) {
 				materia.setEstado(false);
-				materiaRepository.save(materiaMapDto.convertirMateriaDTOAMateria(materia));
+				materiaRepository.save(materia);
 			}
 		});
 	}
 
 	@Override
-	public MateriaDTO buscarMateria(String codigo) { //MateriaDTO
+	public Materia buscarMateria(String codigo) { 
 		// TODO Auto-generated method stub
-		List<MateriaDTO> todasLasMaterias = materiaMapDto.convertirListaMateriaAListaMateriaDTO(materiaRepository.findAll());
-		for (MateriaDTO materias : todasLasMaterias) {
+		List<Materia> todasLasMaterias = materiaRepository.findAll();
+		for (Materia materias : todasLasMaterias) {
 			if(materias.getCodigo().equals(codigo)) {
 				return materias;
 			}
@@ -63,10 +62,10 @@ public class MateriaServiceImp implements MateriaService{
 	}
 
 	@Override
-	public void modificarMateria(MateriaDTO materiaModificada) {
+	public void modificarMateria(Materia materiaModificada) {
 		// TODO Auto-generated method stub
 		materiaModificada.setEstado(true);
-		materiaRepository.save(materiaMapDto.convertirMateriaDTOAMateria(materiaModificada));
+		materiaRepository.save(materiaModificada);
 	}
 
 }
