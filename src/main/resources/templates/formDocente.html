@@ -24,24 +24,36 @@
 				method="post" class="form">
 				<div class="row justify-content-center">
 					<div class="col-sm-6">
+					
+			
+							
 						<label for="legajo" class="form-label mt-1">Legajo</label>
 						<input type="text" class="form-control" id="legajo" data-th-field="*{legajo}"
 							data-th-readonly="${flag}" required>
-
+						
+						<div>
 						<label for="email" class="form-label mt-1">Email</label>
-						<input type="email" class="form-control" id="email" data-th-field="*{email}" required>
+						<input type="text" class="form-control" id="email" data-th-field="*{email}" required>
+						    <p class="form-text text-danger" data-th-if="${#fields.hasErrors('email')}" data-th-errors="*{email}">
+						</div>
+						
 						
 						<label for="telefono" class="form-label mt-1">Telefono</label>
-						<input type="text" class="form-control" id="telefono" data-th-field="*{telefono}" maxlength="10"
+						<input type="number" class="form-control" id="telefono" data-th-field="*{telefono}" maxlength="10"
 							minlength="10" required>
+							<p class="form-text text-danger" data-th-if="${#fields.hasErrors('telefono')}" data-th-errors="*{telefono}">
 					</div>
 					<div class="col-sm-6">
 						<label for="nombre" class="form-label mt-1">Nombre</label>
 						<input type="text" class="form-control" id="nombre" data-th-field="*{nombre}" required>
-
+						<p class="form-text text-danger" data-th-if="${#fields.hasErrors('nombre')}" data-th-errors="*{nombre}">
+	
+						<div>
 						<label for="apellido" class="form-label mt-1">Apellido</label>
 						<input type="text" class="form-control" id="apellido" data-th-field="*{apellido}" required>
-					
+						<p class="form-text text-danger" data-th-if="${#fields.hasErrors('apellido')}" data-th-errors="*{apellido}">
+						</div>
+						
 						<label class="form-label" for="estado">Estado</label>
 						<select data-th-field="*{estado}" class="form-control" required>
 						<option data-th-value="true">True</option>
