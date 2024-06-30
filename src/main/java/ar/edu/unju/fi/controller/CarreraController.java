@@ -32,7 +32,9 @@ public class CarreraController {
 	@GetMapping("/formularioCarrera")
 	public ModelAndView getFormCarrera() {
 		ModelAndView modelView = new ModelAndView("formCarrera");
-		modelView.addObject("nuevaCarrera", nuevaCarrera);	
+		modelView.addObject("nuevaCarrera", nuevaCarrera);
+		modelView.addObject("listadoAlumnos", alumnoService.mostrarAlumnos());
+		modelView.addObject("listadoMaterias", materiaService.mostrarMaterias());
 		modelView.addObject("flag", false);
 		return modelView;
 	}
@@ -73,7 +75,7 @@ public class CarreraController {
 	
 
 	@GetMapping("/borrarCarrera/{codigo}")
-	public ModelAndView deleteCarreraDelListado(@PathVariable(name="codigo") String codigo) {
+	public ModelAndView deleteCarreraDelListado(@PathVariable(name="codigo") Integer codigo) {
 
 		carreraService.borrarCarrera(codigo);
 		ModelAndView modelView = new ModelAndView("listaDeCarreras");
@@ -89,7 +91,7 @@ public class CarreraController {
 	        modelView.addObject("nuevaCarrera", carrera);
 	        modelView.addObject("flag", true);
 	        return modelView;
-	    }
+	  }
 
 	  @PostMapping("/modificarCarrera")
 	    public ModelAndView modificarCarrera(@Valid @ModelAttribute("nuevaCarrera") Carrera carreraModificada, BindingResult resultado) {
@@ -117,4 +119,16 @@ public class CarreraController {
 
 	        return modelView;
 	    }
+
+	  
+	  @GetMapping("/alumnosPorCarrera/{codigo}")
+		public ModelAndView getFormAlumnosPorCarreraB(@PathVariable(name="codigo") Integer codigo) {
+			ModelAndView modelView = new ModelAndView("alumnosXcarrera");
+			modelView.addObject("listadoCarreras", carreraService.mostrarCarreras());
+			modelView.addObject("carrera" , carreraService.buscarCarrera(codigo));
+			
+			return modelView;	
+		}
+	 
+	  
 }

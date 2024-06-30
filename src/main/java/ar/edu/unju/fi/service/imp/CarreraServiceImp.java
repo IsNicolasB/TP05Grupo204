@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import ar.edu.unju.fi.DTO.CarreraDTO;
 import ar.edu.unju.fi.map.CarreraMapDTO;
 import ar.edu.unju.fi.model.Carrera;
+import ar.edu.unju.fi.model.Materia;
 import ar.edu.unju.fi.repository.CarreraRepository;
 import ar.edu.unju.fi.service.CarreraService;
 
@@ -32,10 +33,10 @@ public class CarreraServiceImp implements CarreraService{
 	}
 
 	@Override
-	public void borrarCarrera(String codigo) {
+	public void borrarCarrera(Integer codigo) {
 		List<Carrera> carreras = carreraRepository.findAll();
 		carreras.forEach(carrera -> {
-			if(carrera.getCodigo().equals(Integer.parseInt(codigo))) {
+			if(carrera.getCodigo().equals(codigo)) {
 				carrera.setEstado(false);
 				carreraRepository.save(carrera);
 			}
@@ -44,7 +45,13 @@ public class CarreraServiceImp implements CarreraService{
 
 	@Override
 	public Carrera buscarCarrera(Integer codigo) {
-		return carreraRepository.getReferenceById(codigo);
+		List<Carrera> carreras = carreraRepository.findAll();
+		for (Carrera carrera : carreras) {
+			if(carrera.getCodigo().equals(codigo)) {
+				return carrera;
+			}
+		}
+		return null;
 	}
 
 	@Override

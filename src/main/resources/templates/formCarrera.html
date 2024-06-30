@@ -41,17 +41,18 @@
 					<p class="form-text text-danger" data-th-if="${#fields.hasErrors('duracion')}" 
 						data-th-errors="*{duracion}"></p>
 					
-					<label class="form-label">Alumnos</label>
-					<select data-th-field="*{alumnos}" class="form-control" required multiple>
+					<label  class="form-label mt-1" >Alumnos</label>
+					<select data-th-field="*{alumnos}" class="form-select text-center" required multiple>
 		                <option value="">Seleccionar alumnos</option>
-		                <option data-th-each="alumno : ${alumnos}" data-th-value="${alumno.lu}" data-th-text="${alumno.nombre}"></option>
+		                <option data-th-each="alumno : ${listadoAlumnos}" data-th-value="${alumno.lu}" data-th-text="${alumno.nombre}"></option>
 		            </select>
 						
-					<label class="form-label">Materias</label>
-		            <select data-th-field="*{materias}" class="form-control" required multiple>
-		                <option value="">Seleccionar materia</option>
-		                <option data-th-each="materia : ${materias}" data-th-value="${materia.codigo}" data-th-text="${materia.nombre}"></option>
-		            </select>
+					   <label class="form-label mt-1">Materias</label>
+    <select data-th-field="*{materias}" class="form-select text-center" multiple required >
+        <option value="" disabled>Seleccionar materia</option>
+        <option data-th-each="materia : ${listadoMaterias}" data-th-value="${materia.codigo}" 
+        data-th-text="${materia.nombre}"> </option>
+    </select>
 		            
 		            <label class="form-label" for="estado">Estado</label>
 					<select data-th-field="*{estado}" class="form-select"
