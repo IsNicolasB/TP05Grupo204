@@ -50,7 +50,7 @@ public class Materia implements Serializable{
 	@NotNull(message= "Eliga un estado para la materia")
 	private Boolean estado;
 	
-	@ManyToMany (mappedBy= "alumnos_materias")
+	@ManyToMany (mappedBy= "materias")
 	private List<Alumno> Alumnos;
 	
 	@OneToOne
