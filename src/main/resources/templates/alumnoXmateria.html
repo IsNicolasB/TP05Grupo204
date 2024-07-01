@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Facultad de Ingeniería</title>
+	<link rel="icon" href="/images/logo.ico">
+	<link rel="stylesheet" href="/css/styles.css">
+	<link rel="stylesheet" data-th-href="@{/webjars/bootstrap/5.3.3/css/bootstrap.min.css}">
+</head>
+
+<body>
+
+	<header>
+		<div data-th-replace="~{fragments/header::header}"></div>
+	</header>
+	<div class="row main">
+		<h1 ><span data-th-text="${materia != null ? 'ALUMNOS DE LA MATERIA ' + materia.getNombre() : 'NO HAY MATERIAS'}"></span></h1>
+		<aside class="col-3">
+			<div class="bg-light border-right" id="sidebar-wrapper">
+				<div class="sidebar-heading pb-2 pt-2 text-center border">LISTA DE MATERIAS</div>
+				<div class="list-group list-group-flush border">
+					<a class="list-group-item list-group-item-action bg-light" data-th-each="m : ${listadoMaterias}"
+					 data-th-value="${m.codigo}" data-th-text="${m.nombre}" data-th-href="@{'/alumnosPorMateria/'+${m.codigo}}">
+					</a>
+				</div>
+			</div>
+		</aside>
+		<section class="col-9">
+				<table class="table table-striped text-center">
+					<thead>
+						<tr>
+							<th scope="col">Libreta Universitaria</th>
+							<th scope="col">DNI</th>
+							<th scope="col">Nombre</th>
+							<th scope="col">Apellido</th>
+							<th scope="col">Email</th>
+							<th scope="col">Telefono</th>
+						</tr>
+					</thead>
+					<tbody data-th-if="${materia != null}">
+						<tr data-th-each="alumno : ${materia.alumnos}">
+							<td data-th-text="${alumno.lu}"></td>
+							<td data-th-text="${alumno.dni}"></td>
+							<td data-th-text="${alumno.nombre}"></td>
+							<td data-th-text="${alumno.apellido}"></td>
+							<td data-th-text="${alumno.email}"></td>
+							<td data-th-text="${alumno.telefono}"></td>
+						</tr>
+					</tbody>
+				</table>
+				<br>
+				
+		</section>
+
+	</div>
+	
+
+	<footer>
+		<div data-th-replace="~{fragments/footer::footer}"></div>
+	</footer>
+
+	<script data-th-src="@{/webjars/bootstrap/5.3.3/js/bootstrap.bundle.min.js}"></script>
+</body>
+
+</html>
