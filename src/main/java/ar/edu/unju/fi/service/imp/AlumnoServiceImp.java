@@ -6,7 +6,9 @@ import ar.edu.unju.fi.DTO.AlumnoDTO;
 import ar.edu.unju.fi.map.AlumnoMapDTO;
 import ar.edu.unju.fi.model.Alumno;
 import ar.edu.unju.fi.repository.AlumnoRepository;
+import ar.edu.unju.fi.repository.MateriaRepository;
 import ar.edu.unju.fi.service.AlumnoService;
+import jakarta.transaction.Transactional;
 
 @Service
 public class AlumnoServiceImp implements AlumnoService{
@@ -15,6 +17,20 @@ public class AlumnoServiceImp implements AlumnoService{
 	
 	@Autowired
 	AlumnoMapDTO alumnoMapDTO;
+	
+	@Autowired
+	MateriaRepository materiaRepository;
+
+    @Override
+    @Transactional
+    public Alumno inscribirMateria(String alumnoId, String materiaCodigo) {
+        Alumno alumno = alumnoRepository.findById(alumnoId).orElseThrow(() -> new RuntimeException("Alumno no encontrado"));
+        Materia materia = materiaRepository.findById(materiaCodigo).orElseThrow(() -> new RuntimeException("Materia no encontrada"));
+        alumno.getMaterias().add(materia);
+        materia.getAlumnos().add(alumno);
+        alumnoRepository.save(alumno);
+        return alumno;
+    }
 
 	@Override
 	public boolean guardarAlumno(Alumno alumno) {
