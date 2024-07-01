@@ -73,12 +73,21 @@ public class MateriaController {
         	String alumnoId = alumno.getLu();
             String materiaCodigo = alumno.getMaterias().get(0).getCodigo();
             
-            alumnoService.inscribirMateria(alumnoId, materiaCodigo);
+          alumnoService.inscribirMateria(alumnoId, materiaCodigo);
         	
         }
         
         return modelView;
     }
+    
+	  @GetMapping("/alumnosPorMateria/{codigo}")
+		public ModelAndView getFormAlumnosPorMateria(@PathVariable(name="codigo") String codigo) {
+			ModelAndView modelView = new ModelAndView("alumnoXmateria");
+			modelView.addObject("listadoMaterias", materiaService.mostrarMaterias());
+			modelView.addObject("materia" , materiaService.buscarMateria(codigo));
+			
+			return modelView;	
+		}
     
     @PostMapping("/guardarMateria")
     public ModelAndView saveMateria(@Valid @ModelAttribute("nuevaMateria") Materia materiaParaGuardar, BindingResult resultado) {
