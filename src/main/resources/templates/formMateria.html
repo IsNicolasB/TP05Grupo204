@@ -18,13 +18,16 @@
     <section class="section">
         <h1>FORMULARIO DE MATERIA</h1>
         <div class="justify-content-center text-center">
-            <form data-th-object="${nuevaMateria}" data-th-action="${flag}?@{/modificarMateria}:@{/guardarMateria}"
-                method="post" class="form">
+            <form data-th-object="${nuevaMateria}" data-th-action="${flag}?@{/modificarMateria}:@{/guardarMateria}" method="post" class="form">
+                <!-- Mostrar mensaje de error si existe -->
+                <div data-th-if="${errorMessage}" class="alert alert-danger" role="alert">
+                    <span data-th-text="${errorMessage}"></span>
+                </div>
+
                 <div class="row">
                     <div class="col-sm-6">
-                        <label for="codigo" class="form-label mt-1">Codigo</label>
-                        <input type="text" class="form-control" id="codigo" data-th-field="*{codigo}"
-                            data-th-readonly="${flag}" required>
+                        <label for="codigo" class="form-label mt-1">Código</label>
+                        <input type="text" class="form-control" id="codigo" data-th-field="*{codigo}" data-th-readonly="${flag}" required>
 
                         <label for="nombre" class="form-label mt-1">Nombre</label>
                         <input type="text" class="form-control" id="nombre" data-th-field="*{nombre}" required>
@@ -60,8 +63,7 @@
                         <label for="docente" class="form-label mt-1">Docente</label><br>
                         <select class="form-select text-center" id="docente" data-th-field="*{docente.legajo}" required>
                             <option value="">Seleccionar Docente</option>
-                            <option data-th-each="d : ${listadoDocentes}" data-th-value="${d.legajo}"
-                                data-th-text="${d.apellido}"></option>
+                            <option data-th-each="d : ${listadoDocentes}" data-th-value="${d.legajo}" data-th-text="${d.apellido}"></option>
                         </select>
                         <p class="form-text text-danger" data-th-if="${#fields.hasErrors('docente')}" data-th-errors="*{docente}"></p>
                     </div>

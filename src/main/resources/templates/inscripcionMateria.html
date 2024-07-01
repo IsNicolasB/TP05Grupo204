@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Facultad de Ingeniería - Inscripción a Materias</title>
+    <link rel="icon" href="/images/logo.ico">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/webjars/bootstrap/5.3.3/css/bootstrap.min.css">
+    <style>
+        /* Estilo para centrar la sección */
+        .section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* Ajusta la altura como desees */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div data-th-replace="~{fragments/header::header}"></div>
+    </header>
+    <section class="section">
+        <div class="container">
+            <h1 class="text-center mb-4">INSCRIPCIÓN A MATERIAS</h1>
+            <form action="/inscripcionMaterias" method="post" th:object="${alumno}" th:action="@{/guardarInscripcion}">
+                <div class="row justify-content-center">
+                    <div class="col-md-6">
+                        <label for="lu" class="form-label mt-1">Libreta Universitaria</label>
+                        <select class="form-select" id="lu" name="lu">
+                            <option th:each="alumno : ${listadoAlumnos}" th:value="${alumno.lu}" th:text="${alumno.lu + ' - ' + alumno.apellido + ', ' + alumno.nombre}"></option>
+                        </select>
+                        <br>
+                        <label for="materias" class="form-label mt-1">Materias Disponibles</label>
+                        <select class="form-select" id="materias" name="materias">
+                            <option th:each="materia : ${listaDeMaterias}" th:value="${materia.codigo}" th:text="${materia.nombre}"></option>
+                        </select>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary mt-2 mb-3">Inscribir Materia</button>
+            </form>
+        </div>
+    </section>
+    
+    <script src="/webjars/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

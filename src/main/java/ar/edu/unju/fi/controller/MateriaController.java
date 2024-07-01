@@ -1,6 +1,7 @@
 package ar.edu.unju.fi.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,6 +11,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unju.fi.DTO.MateriaDTO;
+import ar.edu.unju.fi.model.Alumno;
+import ar.edu.unju.fi.model.Docente;
 import ar.edu.unju.fi.model.Materia;
 import ar.edu.unju.fi.service.MateriaService;
 import jakarta.validation.Valid;
@@ -49,20 +52,57 @@ public class MateriaController {
         return modelView;    
     }
     
+    @GetMapping("/inscripcionMateria")
+    public ModelAndView getInscripcionMateria() {
+        ModelAndView modelView = new ModelAndView("inscripcionMateria");
+        modelView.addObject("listaDeMaterias", materiaService.mostrarMaterias());
+        modelView.addObject("listadoAlumnos", alumnoService.mostrarAlumnos());
+        modelView.addObject("alumno", new Alumno()); 
+        return modelView;
+    }
+    
+    @PostMapping("/guardarInscripcion")
+    public ModelAndView inscribirMateria(@ModelAttribute("alumno") Alumno alumno, BindingResult result) {
+        ModelAndView modelView = new ModelAndView();
+        if (result.hasErrors()) {
+        	modelView.setViewName("inscripcionMateria");
+            modelView.addObject("listaDeMaterias", materiaService.mostrarMaterias());
+            modelView.addObject("listadoAlumnos", alumnoService.mostrarAlumnos());
+        } else {
+        	modelView.setViewName("inscripcionMateria");
+        	String alumnoId = alumno.getLu();
+            String materiaCodigo = alumno.getMaterias().get(0).getCodigo();
+            
+            alumnoService.inscribirMateria(alumnoId, materiaCodigo);
+        	
+        }
+        
+        return modelView;
+    }
+    
     @PostMapping("/guardarMateria")
     public ModelAndView saveMateria(@Valid @ModelAttribute("nuevaMateria") Materia materiaParaGuardar, BindingResult resultado) {
         ModelAndView modelView = new ModelAndView();
-        if (resultado.hasErrors() ) {
-        	modelView.setViewName("formMateria");
+
+        if (resultado.hasErrors()) {
+            modelView.setViewName("formMateria");
             modelView.addObject("listadoDocentes", docenteService.mostrarDocentes());
         } else {
-        	modelView.setViewName("listaDeMaterias");
-        	materiaService.guardarMateria(materiaParaGuardar);
+            try {
+            	materiaService.guardarMateria(materiaParaGuardar);
+            } catch(Exception e) {
+            	modelView.addObject("errors", true);
+            	modelView.addObject("cargaMateriaErrorMessage", "Error al cargar en la BD" + e.getMessage());
+            	System.out.println(e.getMessage());
+            }
+            modelView.setViewName("listaDeMaterias");
             modelView.addObject("listadoMaterias", materiaService.mostrarMaterias());
-            
         }
+
         return modelView;
     }
+
+
     
     @GetMapping("/borrarMateria/{codigo}")
     public ModelAndView deleteMateriaDelListado(@PathVariable(name="codigo") String codigo) {
