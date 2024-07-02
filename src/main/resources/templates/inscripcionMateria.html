@@ -24,21 +24,34 @@
     <section class="section">
         <div class="container">
             <h1 class="text-center mb-4">INSCRIPCIÓN A MATERIAS</h1>
-            <form action="/inscripcionMaterias" method="post" th:object="${alumno}" th:action="@{/guardarInscripcion}">
+            <form action="/inscripcionMaterias" method="post" data-th-action="@{/guardarInscripcion}">
                 <div class="row justify-content-center">
                     <div class="col-md-6">
                         <label for="lu" class="form-label mt-1">Libreta Universitaria</label>
-                        <select class="form-select" id="lu" name="lu">
-                            <option th:each="alumno : ${listadoAlumnos}" th:value="${alumno.lu}" th:text="${alumno.lu + ' - ' + alumno.apellido + ', ' + alumno.nombre}"></option>
+                        <select class="form-select" id="alumnoId" name="alumnoId">
+                            <option data-th-each="alumno : ${listadoAlumnos}" data-th-value="${alumno.lu}" data-th-text="${alumno.lu + ' - ' + alumno.apellido + ', ' + alumno.nombre}"></option>
                         </select>
                         <br>
                         <label for="materias" class="form-label mt-1">Materias Disponibles</label>
-                        <select class="form-select" id="materias" name="materias">
-                            <option th:each="materia : ${listaDeMaterias}" th:value="${materia.codigo}" th:text="${materia.nombre}"></option>
+                        <select class="form-select" id="materiaId" name="materiaId">
+                            <option data-th-each="materia : ${listaDeMaterias}" data-th-value="${materia.codigo}" data-th-text="${materia.nombre}"></option>
                         </select>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary mt-2 mb-3">Inscribir Materia</button>
+                <div  data-th-if="${listaDeMaterias != null and !listaDeMaterias.isEmpty()}" >
+
+              		<button type="submit" class="btn btn-primary mt-2 mb-3" >Inscribir Materia</button>
+              		<br>
+              	</div>
+              	<div data-th-if="${Mensaje}" class="alert alert-success text-center" role="alert">
+    				<p class=" "data-th-text="${Mensaje}"></p>
+				</div>
+              	
+              	<div class="alert alert-danger text-center " role="alert" data-th-if="${listaDeMaterias == null or listaDeMaterias.size() == 0}">
+              		<br>
+		  			<p >AHORA NO HAY MATERIAS DISPONIBLES</p>
+				</div>
+
             </form>
         </div>
     </section>

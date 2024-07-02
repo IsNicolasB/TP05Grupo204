@@ -23,12 +23,7 @@ public class MateriaServiceImp implements MateriaService{
 	@Override
 	public void guardarMateria(Materia materia) {
 		// TODO Auto-generated method stub
-		
-		
-		
-		if (!materiaRepository.existsById(materia.getCodigo())) {
-			materiaRepository.save(materia);
-		}
+		materiaRepository.save(materia);
 	}
 
 	@Override
@@ -39,7 +34,7 @@ public class MateriaServiceImp implements MateriaService{
 	}
 
 	@Override
-	public void borrarMateria(String codigo) {
+	public void borrarMateria(Integer codigo) {
 		List<Materia> materias = materiaRepository.findAll();
 		materias.forEach(materia -> {
 			if(materia.getCodigo().equals(codigo)) {
@@ -50,7 +45,7 @@ public class MateriaServiceImp implements MateriaService{
 	}
 
 	@Override
-	public Materia buscarMateria(String codigo) { 
+	public Materia buscarMateria(Integer codigo) { 
 		// TODO Auto-generated method stub
 		List<Materia> todasLasMaterias = materiaRepository.findAll();
 		for (Materia materias : todasLasMaterias) {

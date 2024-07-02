@@ -14,7 +14,7 @@ import lombok.Setter;
 @Component
 public class MateriaDTO {
 	
-	private String codigo;
+	private Integer codigo;
 	private String nombre;
 	private String curso;
 	private Docente docente;

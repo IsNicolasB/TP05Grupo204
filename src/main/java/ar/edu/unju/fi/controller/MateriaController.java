@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unju.fi.DTO.MateriaDTO;
@@ -41,7 +42,6 @@ public class MateriaController {
         modelView.addObject("nuevaMateria", nuevaMateriaDTO);
         modelView.addObject("listadoDocentes", docenteService.mostrarDocentes());
         modelView.addObject("flag", false);
-        modelView.addObject("band", false);
         return modelView;
     }
     
@@ -62,26 +62,30 @@ public class MateriaController {
     }
     
     @PostMapping("/guardarInscripcion")
-    public ModelAndView inscribirMateria(@ModelAttribute("alumno") Alumno alumno, BindingResult result) {
+    public ModelAndView inscribirMateria(@RequestParam("alumnoId") String alumnoId, @RequestParam("materiaId") Integer materiaId) {
         ModelAndView modelView = new ModelAndView();
-        if (result.hasErrors()) {
-        	modelView.setViewName("inscripcionMateria");
-            modelView.addObject("listaDeMaterias", materiaService.mostrarMaterias());
-            modelView.addObject("listadoAlumnos", alumnoService.mostrarAlumnos());
+        modelView.setViewName("inscripcionMateria");
+        modelView.addObject("listaDeMaterias", materiaService.mostrarMaterias());
+        modelView.addObject("listadoAlumnos", alumnoService.mostrarAlumnos());
+
+        Alumno alumno = alumnoService.buscarAlumno(alumnoId);
+        Materia materia = materiaService.buscarMateria(materiaId);
+
+        if (alumno == null || materia == null) {
+            modelView.addObject("Mensaje", "Error: Alumno o Materia no encontrados.");
+        } else if (alumno.getMaterias().contains(materia)) {
+            modelView.addObject("Mensaje", "El alumno ya está inscripto en esta materia");
         } else {
-        	modelView.setViewName("inscripcionMateria");
-        	String alumnoId = alumno.getLu();
-            String materiaCodigo = alumno.getMaterias().get(0).getCodigo();
-            
-          alumnoService.inscribirMateria(alumnoId, materiaCodigo);
-        	
+            modelView.addObject("Mensaje", "La inscripción se realizó correctamente");
+            alumno.getMaterias().add(materia);
+            alumnoService.inscribirMateria(alumno);
         }
-        
+
         return modelView;
     }
-    
+
 	  @GetMapping("/alumnosPorMateria/{codigo}")
-		public ModelAndView getFormAlumnosPorMateria(@PathVariable(name="codigo") String codigo) {
+		public ModelAndView getFormAlumnosPorMateria(@PathVariable(name="codigo") Integer codigo) {
 			ModelAndView modelView = new ModelAndView("alumnoXmateria");
 			modelView.addObject("listadoMaterias", materiaService.mostrarMaterias());
 			modelView.addObject("materia" , materiaService.buscarMateria(codigo));
@@ -114,7 +118,7 @@ public class MateriaController {
 
     
     @GetMapping("/borrarMateria/{codigo}")
-    public ModelAndView deleteMateriaDelListado(@PathVariable(name="codigo") String codigo) {
+    public ModelAndView deleteMateriaDelListado(@PathVariable(name="codigo") Integer codigo) {
         materiaService.borrarMateria(codigo);
         ModelAndView modelView = new ModelAndView("listaDeMaterias");
         modelView.addObject("listadoMaterias", materiaService.mostrarMaterias());
@@ -122,7 +126,7 @@ public class MateriaController {
     }
     
     @GetMapping("/modificarMateria/{codigo}")
-    public ModelAndView getFormModificarMateria(@PathVariable(name="codigo") String codigo) {
+    public ModelAndView getFormModificarMateria(@PathVariable(name="codigo") Integer codigo) {
         Materia materia = materiaService.buscarMateria(codigo);
         ModelAndView modelView = new ModelAndView("formMateria");
         modelView.addObject("nuevaMateria", materia);
