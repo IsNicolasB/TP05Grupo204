@@ -17,7 +17,8 @@
 	</header>
 	<section>
 		<h1> LISTADO DE ALUMNOS </h1>
-		<table class="table table-striped text-center">
+		<div class="table-responsive">
+		<table class="table table-striped table-hover text-center">
 			<thead>
 				<tr>
 					<th scope="col">Libreta Universitaria</th>
@@ -39,8 +40,8 @@
 					<td data-th-text="${alumno.apellido}"></td>
 					<td data-th-text="${alumno.email}"></td>
 					<td data-th-text="${alumno.telefono}"></td>
-					<td data-th-text="${alumno.carrera != null ? alumno.carrera.getNombre() : 'Sin Carrera'}"></td>
-					<td data-th-text="${alumno.materias != null ? alumno.carrera.size() : 'Sin Materias'}"></td>
+					<td data-th-text="${alumno.carrera != null ? alumno.carrera.nombre : 'Sin Carrera'}"></td>
+					<td data-th-text="${alumno.materias != null ? alumno.materias.size() : 'Sin Materias'}"></td>
 					<td>
 						<a data-th-href="@{'/borrarAlumno/'+${alumno.lu}}" class="btn btn-danger">Borrar</a>
 						<a data-th-href="@{'/modificarAlumno/'+${alumno.lu}}" class="btn btn-warning">Modificar</a>
@@ -48,6 +49,7 @@
 				</tr>
 			</tbody>
 		</table>
+		</div>
 		<br>
 		<p class="text-danger text-center p-2" data-th-if="${saved}">El alumno que ha ingresado no se ha cargado debido a que su LU ya pertenece a otro Alumno</p><br>
 	</section>
