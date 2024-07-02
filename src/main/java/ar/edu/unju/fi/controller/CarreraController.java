@@ -19,16 +19,16 @@ import jakarta.validation.Valid;
 public class CarreraController {
 	@Autowired
 	Carrera nuevaCarrera;
-	
+
 	@Autowired
 	CarreraService carreraService;
-	
+
 	@Autowired
 	AlumnoService alumnoService;
-	
+
 	@Autowired
 	MateriaService materiaService;
-	
+
 	@GetMapping("/formularioCarrera")
 	public ModelAndView getFormCarrera() {
 		ModelAndView modelView = new ModelAndView("formCarrera");
@@ -38,97 +38,100 @@ public class CarreraController {
 		modelView.addObject("flag", false);
 		return modelView;
 	}
-	
+
 	@PostMapping("/guardarCarrera")
-	public ModelAndView saveCarrera(@Valid @ModelAttribute("nuevaCarrera") Carrera carreraParaGuardar, BindingResult resultado) {
-		
-		carreraParaGuardar.getAlumnos().forEach( a -> a.setCarrera(carreraParaGuardar));
-		carreraParaGuardar.getMaterias().forEach( m -> m.setCarrera(carreraParaGuardar));
-		
+	public ModelAndView saveCarrera(@Valid @ModelAttribute("nuevaCarrera") Carrera carreraParaGuardar,
+			BindingResult resultado) {
+
 		ModelAndView modelView = new ModelAndView();
-		
+
 		if (resultado.hasErrors()) {
 			modelView.setViewName("formCarrera");
+			modelView.addObject("listadoAlumnos", alumnoService.mostrarAlumnos());
+			modelView.addObject("listadoMaterias", materiaService.mostrarMaterias());
 			modelView.addObject("flag", false);
-		}
-		else {
+		} else {
+			
 			try {
-				carreraService.guardarCarrera(carreraParaGuardar);	
-			}catch(Exception e) {			
+				carreraService.guardarCarrera(carreraParaGuardar);
+			} catch (Exception e) {
 				modelView.addObject("errors", true);
 				modelView.addObject("cargaCarreraErrorMessage", "Error al cargar en la BD" + e.getMessage());
 				System.out.println(e.getMessage());
 			}
+			carreraParaGuardar.getAlumnos().forEach(a -> a.setCarrera(carreraParaGuardar));
+			carreraParaGuardar.getMaterias().forEach(m -> m.setCarrera(carreraParaGuardar));
 			modelView.setViewName("listaDeCarreras");
-			modelView.addObject("listadoCarreras", carreraService.mostrarCarreras());	
+			modelView.addObject("listadoCarreras", carreraService.mostrarCarreras());
 		}
-		
+
 		return modelView;
 	}
-	
+
 	@GetMapping("/listadoCarreras")
 	public ModelAndView getFormListaCarrera() {
 		ModelAndView modelView = new ModelAndView("listaDeCarreras");
 		modelView.addObject("listadoCarreras", carreraService.mostrarCarreras());
-		return modelView;	
+		return modelView;
 	}
-	
 
 	@GetMapping("/borrarCarrera/{codigo}")
-	public ModelAndView deleteCarreraDelListado(@PathVariable(name="codigo") Integer codigo) {
+	public ModelAndView deleteCarreraDelListado(@PathVariable(name = "codigo") Integer codigo) {
 
 		carreraService.borrarCarrera(codigo);
 		ModelAndView modelView = new ModelAndView("listaDeCarreras");
-		modelView.addObject("listadoCarreras", carreraService.mostrarCarreras());	
-		
-		return modelView;		
-		}
-	
-	  @GetMapping("/modificarCarrera/{codigo}")
-	    public ModelAndView getFormModificarCarrera(@PathVariable(name="codigo") Integer codigo) {
-	        Carrera carrera = carreraService.buscarCarrera(codigo);
-	        ModelAndView modelView = new ModelAndView("formCarrera");
-	        modelView.addObject("nuevaCarrera", carrera);
-	        modelView.addObject("flag", true);
-	        return modelView;
-	  }
+		modelView.addObject("listadoCarreras", carreraService.mostrarCarreras());
 
-	  @PostMapping("/modificarCarrera")
-	    public ModelAndView modificarCarrera(@Valid @ModelAttribute("nuevaCarrera") Carrera carreraModificada, BindingResult resultado) {
-	    	
-		  	carreraModificada.getAlumnos().forEach( a -> a.setCarrera(carreraModificada));
-			carreraModificada.getMaterias().forEach( m -> m.setCarrera(carreraModificada));
-		  
-		  	ModelAndView modelView = new ModelAndView();
+		return modelView;
+	}
+
+	@GetMapping("/modificarCarrera/{codigo}")
+	public ModelAndView getFormModificarCarrera(@PathVariable(name = "codigo") Integer codigo) {
+		Carrera carrera = carreraService.buscarCarrera(codigo);
+		ModelAndView modelView = new ModelAndView("formCarrera");
+		modelView.addObject("nuevaCarrera", carrera);
+		modelView.addObject("listadoAlumnos", alumnoService.mostrarAlumnos());
+		modelView.addObject("listadoMaterias", materiaService.mostrarMaterias());
+		modelView.addObject("flag", true);
+		return modelView;
+	}
+
+	@PostMapping("/modificarCarrera")
+	public ModelAndView modificarCarrera(@Valid @ModelAttribute("nuevaCarrera") Carrera carreraModificada,
+			BindingResult resultado) {
+
+		ModelAndView modelView = new ModelAndView();
+
+		if (resultado.hasErrors()) {
+			modelView.setViewName("formCarrera");
+			modelView.addObject("listadoAlumnos", alumnoService.mostrarAlumnos());
+			modelView.addObject("listadoMaterias", materiaService.mostrarMaterias());
+			modelView.addObject("flag", true);
+		} else {
+			try {
 			
-			if (resultado.hasErrors()) {
-				modelView.setViewName("formCarrera");
-				modelView.addObject("flag", true);
+				carreraService.guardarCarrera(carreraModificada);
+			} catch (Exception e) {
+				modelView.addObject("errors", true);
+				modelView.addObject("cargaCarreraErrorMessage", "Error al cargar en la BD" + e.getMessage());
+				System.out.println(e.getMessage());
 			}
-			else {
-				try {
-					carreraService.guardarCarrera(carreraModificada);	
-				}catch(Exception e) {			
-					modelView.addObject("errors", true);
-					modelView.addObject("cargaCarreraErrorMessage", "Error al cargar en la BD" + e.getMessage());
-					System.out.println(e.getMessage());
-				}
-				modelView.setViewName("listaDeCarreras");
-				modelView.addObject("listadoCarreras", carreraService.mostrarCarreras());	
-			}
-
-	        return modelView;
-	    }
-
-	  
-	  @GetMapping("/alumnosPorCarrera/{codigo}")
-		public ModelAndView getFormAlumnosPorCarreraB(@PathVariable(name="codigo") Integer codigo) {
-			ModelAndView modelView = new ModelAndView("alumnosXcarrera");
+			carreraModificada.getAlumnos().forEach(a -> a.setCarrera(carreraModificada));
+			carreraModificada.getMaterias().forEach(m -> m.setCarrera(carreraModificada));
+			modelView.setViewName("listaDeCarreras");
 			modelView.addObject("listadoCarreras", carreraService.mostrarCarreras());
-			modelView.addObject("carrera" , carreraService.buscarCarrera(codigo));
-			
-			return modelView;	
 		}
-	 
-	  
+
+		return modelView;
+	}
+
+	@GetMapping("/alumnosPorCarrera/{codigo}")
+	public ModelAndView getFormAlumnosPorCarreraB(@PathVariable(name = "codigo") Integer codigo) {
+		ModelAndView modelView = new ModelAndView("alumnosXcarrera");
+		modelView.addObject("listadoCarreras", carreraService.mostrarCarreras());
+		modelView.addObject("carrera", carreraService.buscarCarrera(codigo));
+
+		return modelView;
+	}
+
 }
