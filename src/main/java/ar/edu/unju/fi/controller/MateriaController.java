@@ -88,6 +88,8 @@ public class MateriaController {
 		public ModelAndView getFormAlumnosPorMateria(@PathVariable(name="codigo") Integer codigo) {
 			ModelAndView modelView = new ModelAndView("alumnoXmateria");
 			modelView.addObject("listadoMaterias", materiaService.mostrarMaterias());
+	        modelView.addObject("listadoAlumnos", alumnoService.mostrarAlumnos());
+
 			modelView.addObject("materia" , materiaService.buscarMateria(codigo));
 			
 			return modelView;	
