@@ -51,16 +51,16 @@ public class CarreraController {
 			modelView.addObject("listadoMaterias", materiaService.mostrarMaterias());
 			modelView.addObject("flag", false);
 		} else {
-			
 			try {
+				carreraParaGuardar.getAlumnos().forEach(a -> a.setCarrera(carreraParaGuardar));
+				carreraParaGuardar.getMaterias().forEach(m -> m.setCarrera(carreraParaGuardar));
 				carreraService.guardarCarrera(carreraParaGuardar);
 			} catch (Exception e) {
 				modelView.addObject("errors", true);
 				modelView.addObject("cargaCarreraErrorMessage", "Error al cargar en la BD" + e.getMessage());
 				System.out.println(e.getMessage());
 			}
-			carreraParaGuardar.getAlumnos().forEach(a -> a.setCarrera(carreraParaGuardar));
-			carreraParaGuardar.getMaterias().forEach(m -> m.setCarrera(carreraParaGuardar));
+			
 			modelView.setViewName("listaDeCarreras");
 			modelView.addObject("listadoCarreras", carreraService.mostrarCarreras());
 		}
@@ -109,15 +109,14 @@ public class CarreraController {
 			modelView.addObject("flag", true);
 		} else {
 			try {
-			
+				carreraModificada.getAlumnos().forEach(a -> a.setCarrera(carreraModificada));
+				carreraModificada.getMaterias().forEach(m -> m.setCarrera(carreraModificada));
 				carreraService.guardarCarrera(carreraModificada);
 			} catch (Exception e) {
 				modelView.addObject("errors", true);
 				modelView.addObject("cargaCarreraErrorMessage", "Error al cargar en la BD" + e.getMessage());
 				System.out.println(e.getMessage());
 			}
-			carreraModificada.getAlumnos().forEach(a -> a.setCarrera(carreraModificada));
-			carreraModificada.getMaterias().forEach(m -> m.setCarrera(carreraModificada));
 			modelView.setViewName("listaDeCarreras");
 			modelView.addObject("listadoCarreras", carreraService.mostrarCarreras());
 		}
