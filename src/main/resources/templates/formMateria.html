@@ -12,33 +12,32 @@
     <header>
         <div data-th-replace="~{fragments/header::header}"></div>
     </header>
-    <section class="section">
+    <section class="row section justify-content-center text-center">
         <h1>FORMULARIO DE MATERIA</h1>
         <div class="justify-content-center text-center">
             <form data-th-object="${nuevaMateria}" data-th-action="${flag}?@{/modificarMateria}:@{/guardarMateria}" method="post" class="form">
-                <!-- Mostrar mensaje de error si existe -->
                 <div data-th-if="${errorMessage}" class="alert alert-danger" role="alert">
                     <span data-th-text="${errorMessage}"></span>
                 </div>
                 <div class="row">
-                    <div class="col-sm-6">
+                    <div class="col-sm-9 col-md-6">
                         <label for="codigo" class="form-label mt-1">Código</label>
                         <input type="text" class="form-control" id="codigo" data-th-field="*{codigo}" data-th-readonly="${flag}" data-th-disabled="!${flag}" placeholder="Codigo Autogenerado">
 						
                         <label for="nombre" class="form-label mt-1">Nombre</label>
-                        <input type="text" class="form-control" id="nombre" data-th-field="*{nombre}" required>
+                        <input type="text" class="form-control" id="nombre" data-th-field="*{nombre}" placeholder="Nombre de la Materia" required>
                         <p class="alert alert-warning" role="alert" data-th-if="${#fields.hasErrors('nombre')}" data-th-errors="*{nombre}"></p>
                     </div>
-                    <div class="col-sm-6">
+                    <div class="col-sm-9 col-md-6">
                         <label for="curso" class="form-label mt-1">Curso</label>
-                        <input type="text" class="form-control" id="curso" data-th-field="*{curso}" required>
+                        <input type="text" class="form-control" id="curso" data-th-field="*{curso}" placeholder="Curso de la Materia" required>
                         <p class="alert alert-warning" role="alert" data-th-if="${#fields.hasErrors('curso')}" data-th-errors="*{curso}"></p>
 
                         <label for="horas" class="form-label mt-1">Horas</label>
-                        <input type="number" class="form-control" id="horas" data-th-field="*{cantidadHoras}">
+                        <input type="number" class="form-control" id="horas" data-th-field="*{cantidadHoras}" placeholder="Cantidad de Horas Totales">
                         <p class="alert alert-warning" role="alert" data-th-if="${#fields.hasErrors('cantidadHoras')}" data-th-errors="*{cantidadHoras}"></p>
                     </div>
-                    <div class="col-sm-6">
+                    <div class="col-sm-9 col-md-6">
                         <label for="estadoMateria" class="form-label mt-1">Estado</label><br>
                         <select class="form-select text-center" id="estadoMateria" data-th-field="*{estado}">
                             <option value="true">True</option>
@@ -46,7 +45,7 @@
                         </select>
                         <p class="alert alert-warning" role="alert" data-th-if="${#fields.hasErrors('estado')}" data-th-errors="*{estado}"></p>
                     </div>
-                    <div class="col-sm-6 text-center">
+                    <div class="col-sm-9 col-md-6 text-center">
                         <label for="modalidad" class="form-label mt-1">Modalidad</label><br>
                         <select class="form-select text-center" id="modalidad" data-th-field="*{modalidad}">
                             <option value="">Seleccionar Modalidad</option>
@@ -55,9 +54,9 @@
                         </select>
                         <p class="alert alert-warning" role="alert" data-th-if="${#fields.hasErrors('modalidad')}" data-th-errors="*{modalidad}"></p>
                     </div>
-                    <div class="col-sm-6 text-center">
+                    <div class="col-sm-9 col-md-6 text-center">
                         <label for="docente" class="form-label mt-1">Docente</label><br>
-                        <select class="form-select text-center" id="docente" data-th-field="*{docente.legajo}" required>
+                        <select class="form-select text-center" id="docente" data-th-field="*{docente.legajo}"  required>
                             <option value="">Seleccionar Docente</option>
                             <option data-th-each="d : ${listadoDocentes}" data-th-value="${d.legajo}" data-th-text="${d.apellido}"></option>
                         </select>

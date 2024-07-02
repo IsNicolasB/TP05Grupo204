@@ -39,6 +39,7 @@ public class MateriaServiceImp implements MateriaService{
 		materias.forEach(materia -> {
 			if(materia.getCodigo().equals(codigo)) {
 				materia.setEstado(false);
+				materia.getAlumnos().forEach( b -> b.getMaterias().removeIf(c -> c.getCodigo().equals(codigo)));
 				materiaRepository.save(materia);
 			}
 		});
