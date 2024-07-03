@@ -36,6 +36,8 @@ public class CarreraServiceImp implements CarreraService{
 		List<Carrera> carreras = carreraRepository.findAll();
 		carreras.forEach(carrera -> {
 			if(carrera.getCodigo().equals(codigo)) {
+				carrera.getAlumnos().forEach(a -> a.setCarrera(null));
+				carrera.getMaterias().forEach(m -> m.setCarrera(null));
 				carrera.setEstado(false);
 				carreraRepository.save(carrera);
 			}
@@ -56,6 +58,15 @@ public class CarreraServiceImp implements CarreraService{
 	@Override
 	public void modificarCarrera(Carrera carrera) {
 		carreraRepository.save(carrera);
+	}
+
+	@Override
+	public void borrarRelaciones(Carrera carrera) {
+		carrera.getAlumnos().forEach(a -> a.setCarrera(null));
+		carrera.getMaterias().forEach(m -> m.setCarrera(null));
+		carrera.getAlumnos().clear();
+		carrera.getMaterias().clear();
+		
 	}
 	
 }
