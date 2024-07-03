@@ -67,7 +67,7 @@ public class AlumnoServiceImp implements AlumnoService{
 	
 	@Override
 	public void borrarRelaciones(Alumno alumno) {
-		alumno.getCarrera().getAlumnos().removeIf(e -> e.getLu().equals(lu));
+		alumno.getCarrera().getAlumnos().removeIf(e -> e.getLu().equals(alumno.getLu()));
 		alumno.setCarrera(null);
 	}
 	

@@ -92,7 +92,9 @@ public class AlumnoController {
     		modelView.addObject("flag", true);
     	}else {
     		alumnoService.modificarAlumno(alumnoModificado);
-    		alumnoModificado.getCarrera().getAlumnos().add(alumnoModificado);
+    		if(alumnoModificado.getCarrera()!=null) {
+    			alumnoModificado.getCarrera().getAlumnos().add(alumnoModificado);
+    		}
             modelView= new ModelAndView("listaDeAlumnos");
             modelView.addObject("listadoAlumnos", alumnoService.mostrarAlumnos());
     	}
