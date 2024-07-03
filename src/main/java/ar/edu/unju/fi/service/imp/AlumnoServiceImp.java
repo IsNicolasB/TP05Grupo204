@@ -46,10 +46,10 @@ public class AlumnoServiceImp implements AlumnoService{
 	public void borrarAlumno(String lu) {
 		alumnoRepository.findAll().forEach(a -> {
 			if(a.getLu().equals(lu)) {
-				a.setCarrera(null);
-				a.getMaterias().forEach();
+				a=borrarRelaciones(a);
 				a.setEstado(false);
 				a.getMaterias().forEach(m -> m.getAlumnos().removeIf(c -> c.getLu().equals(lu)));
+				a.getMaterias().clear();
 				alumnoRepository.save(a);
 			}
 		});
@@ -57,20 +57,18 @@ public class AlumnoServiceImp implements AlumnoService{
 
 	@Override
 	public void modificarAlumno(Alumno alumnoModificado) {
-//		int i=0;
-//		List<Alumno> alumnos = alumnoRepository.findAll();
-//		for (Alumno alumno : alumnos) {
-//			if (alumno.getDni().equals(alumnoModificado.getDni())) {
-//				
-//			}
-//			i++;
-//		}
 		alumnoRepository.save(alumnoModificado);
 	}
 
 	@Override
 	public Alumno buscarAlumno(String lu) {
 		return alumnoRepository.getReferenceById(lu); 
+	}
+	
+	@Override
+	public void borrarRelaciones(Alumno alumno) {
+		alumno.getCarrera().getAlumnos().removeIf(e -> e.getLu().equals(lu));
+		alumno.setCarrera(null);
 	}
 	
 }
