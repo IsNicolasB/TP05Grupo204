@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -9,9 +8,7 @@
     <link rel="stylesheet" data-th-href="@{/css/styles.css}">
     <link rel="stylesheet" data-th-href="@{/webjars/bootstrap/5.3.3/css/bootstrap.min.css}">
 </head>
-
 <body>
-
     <header>
         <div data-th-replace="~{fragments/header::header}"></div>
     </header>
@@ -23,24 +20,23 @@
                 <div data-th-if="${errorMessage}" class="alert alert-danger" role="alert">
                     <span data-th-text="${errorMessage}"></span>
                 </div>
-
                 <div class="row">
                     <div class="col-sm-6">
                         <label for="codigo" class="form-label mt-1">Código</label>
-                        <input type="text" class="form-control" id="codigo" data-th-field="*{codigo}" data-th-readonly="${flag}" required>
-
+                        <input type="text" class="form-control" id="codigo" data-th-field="*{codigo}" data-th-readonly="${flag}" data-th-disabled="!${flag}" placeholder="Codigo Autogenerado">
+						
                         <label for="nombre" class="form-label mt-1">Nombre</label>
                         <input type="text" class="form-control" id="nombre" data-th-field="*{nombre}" required>
-                        <p class="form-text text-danger" data-th-if="${#fields.hasErrors('nombre')}" data-th-errors="*{nombre}"></p>
+                        <p class="alert alert-warning" role="alert" data-th-if="${#fields.hasErrors('nombre')}" data-th-errors="*{nombre}"></p>
                     </div>
                     <div class="col-sm-6">
                         <label for="curso" class="form-label mt-1">Curso</label>
                         <input type="text" class="form-control" id="curso" data-th-field="*{curso}" required>
-                        <p class="form-text text-danger" data-th-if="${#fields.hasErrors('curso')}" data-th-errors="*{curso}"></p>
+                        <p class="alert alert-warning" role="alert" data-th-if="${#fields.hasErrors('curso')}" data-th-errors="*{curso}"></p>
 
                         <label for="horas" class="form-label mt-1">Horas</label>
                         <input type="number" class="form-control" id="horas" data-th-field="*{cantidadHoras}">
-                        <p class="form-text text-danger" data-th-if="${#fields.hasErrors('cantidadHoras')}" data-th-errors="*{cantidadHoras}"></p>
+                        <p class="alert alert-warning" role="alert" data-th-if="${#fields.hasErrors('cantidadHoras')}" data-th-errors="*{cantidadHoras}"></p>
                     </div>
                     <div class="col-sm-6">
                         <label for="estadoMateria" class="form-label mt-1">Estado</label><br>
@@ -48,7 +44,7 @@
                             <option value="true">True</option>
                             <option value="false">False</option>
                         </select>
-                        <p class="form-text text-danger" data-th-if="${#fields.hasErrors('estado')}" data-th-errors="*{estado}"></p>
+                        <p class="alert alert-warning" role="alert" data-th-if="${#fields.hasErrors('estado')}" data-th-errors="*{estado}"></p>
                     </div>
                     <div class="col-sm-6 text-center">
                         <label for="modalidad" class="form-label mt-1">Modalidad</label><br>
@@ -57,7 +53,7 @@
                             <option value="Presencial">Presencial</option>
                             <option value="Virtual">Virtual</option>
                         </select>
-                        <p class="form-text text-danger" data-th-if="${#fields.hasErrors('modalidad')}" data-th-errors="*{modalidad}"></p>
+                        <p class="alert alert-warning" role="alert" data-th-if="${#fields.hasErrors('modalidad')}" data-th-errors="*{modalidad}"></p>
                     </div>
                     <div class="col-sm-6 text-center">
                         <label for="docente" class="form-label mt-1">Docente</label><br>
@@ -65,7 +61,7 @@
                             <option value="">Seleccionar Docente</option>
                             <option data-th-each="d : ${listadoDocentes}" data-th-value="${d.legajo}" data-th-text="${d.apellido}"></option>
                         </select>
-                        <p class="form-text text-danger" data-th-if="${#fields.hasErrors('docente')}" data-th-errors="*{docente}"></p>
+                        <p class="alert alert-warning" role="alert" data-th-if="${#fields.hasErrors('docente')}" data-th-errors="*{docente}"></p>
                     </div>
                 </div>
                 <button type="submit" class="btn btn-primary mt-2 mb-3">Guardar Materia</button>
@@ -79,5 +75,4 @@
 
     <script data-th-src="@{/webjars/bootstrap/5.3.3/js/bootstrap.bundle.min.js}"></script>
 </body>
-
 </html>

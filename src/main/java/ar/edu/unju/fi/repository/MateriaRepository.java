@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 import ar.edu.unju.fi.model.Materia;
 
 @Repository
-public interface MateriaRepository extends JpaRepository<Materia, String> {
+public interface MateriaRepository extends JpaRepository<Materia, Integer> {
 	List<Materia> findMateriaByEstado(boolean estado);
 }

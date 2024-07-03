@@ -12,7 +12,7 @@ public interface MateriaService {
 	
 	public void guardarMateria(Materia materiaDTO);
 	public List<MateriaDTO> mostrarMaterias();
-	public void borrarMateria (String codigo);
+	public void borrarMateria (Integer codigo);
 	public void modificarMateria (Materia materia);
-	public Materia buscarMateria(String codigo);
+	public Materia buscarMateria(Integer codigo);
 }
