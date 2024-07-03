@@ -46,7 +46,7 @@ public class AlumnoServiceImp implements AlumnoService{
 	public void borrarAlumno(String lu) {
 		alumnoRepository.findAll().forEach(a -> {
 			if(a.getLu().equals(lu)) {
-				a=borrarRelaciones(a);
+				borrarRelaciones(a);
 				a.setEstado(false);
 				a.getMaterias().forEach(m -> m.getAlumnos().removeIf(c -> c.getLu().equals(lu)));
 				a.getMaterias().clear();
