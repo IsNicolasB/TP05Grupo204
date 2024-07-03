@@ -16,19 +16,26 @@
 		<div data-th-replace="~{fragments/header::header}"></div>
 	</header>
 	<div class="row main">
-		<h1 ><span data-th-text="${carrera != null ? 'ALUMNOS DE LA CARRERA ' + carrera.getNombre() : 'NO HAY CARRERAS'}"></span></h1>
+		<h1>
+			<span data-th-text="${carrera != null ? 'ALUMNOS DE LA CARRERA ' + carrera.getNombre() :
+			 listadoCarreras.size() != 0 ? 'ALUMNOS DE TODAS LAS CARRERAS' : 'NO HAY CARRERAS DISPONIBLES'}"></span>
+		</h1>
 		<aside class="col-3">
-			<div class="bg-light border-right" id="sidebar-wrapper">
-				<div class="sidebar-heading pb-2 pt-2 text-center border">LISTA DE CARRERAS</div>
+			<div class="bg-light border-right text-center" id="sidebar-wrapper">
+				<div class="sidebar-heading pb-2 pt-2 border">LISTA DE CARRERAS</div>
 				<div class="list-group list-group-flush border">
-					<a class="list-group-item list-group-item-action bg-light" data-th-each="c : ${listadoCarreras}"
-					 data-th-value="${c.codigo}" data-th-text="${c.nombre}" data-th-href="@{'/alumnosPorCarrera/'+${c.codigo}}">
+					<a class="list-group-item list-group-item-action bg-light link-index"
+						href="/alumnosPorCarrera/0">TODAS</a>
+					<a class="list-group-item list-group-item-action bg-light link-index"
+						data-th-each="c : ${listadoCarreras}" data-th-value="${c.codigo}" data-th-text="${c.nombre}"
+						data-th-href="@{'/alumnosPorCarrera/'+${c.codigo}}">
 					</a>
 				</div>
 			</div>
 		</aside>
 		<section class="col-9">
-				<table class="table table-striped text-center">
+			<div class="table-responsive">
+				<table class="table table-striped table-hover text-center">
 					<thead>
 						<tr>
 							<th scope="col">Libreta Universitaria</th>
@@ -41,6 +48,22 @@
 							<th scope="col">Materias</th>
 						</tr>
 					</thead>
+
+					<tbody data-th-if="${carrera == null && listadoAlumnos.size() != 0}">
+						<tr data-th-each="alumno : ${listadoAlumnos}" data-th-if="${alumno.carrera != null}">
+
+							<td data-th-text="${alumno.lu}"></td>
+							<td data-th-text="${alumno.dni}"></td>
+							<td data-th-text="${alumno.nombre}"></td>
+							<td data-th-text="${alumno.apellido}"></td>
+							<td data-th-text="${alumno.email}"></td>
+							<td data-th-text="${alumno.telefono}"></td>
+							<td data-th-text="${alumno.carrera.nombre}"></td>
+							<td data-th-text="${alumno.materias.size()}"></td>
+
+						</tr>
+					</tbody>
+
 					<tbody data-th-if="${carrera != null}">
 						<tr data-th-each="alumno : ${carrera.alumnos}">
 							<td data-th-text="${alumno.lu}"></td>
@@ -54,12 +77,17 @@
 						</tr>
 					</tbody>
 				</table>
-				<br>
-				
+			</div>
+			<div class="alert alert-warning text-center " role="alert" data-th-if="${listadoCarreras.size() == 0}">
+				<p>No hay carreras disponibles</p>
+			</div>
+
+			<br>
+
 		</section>
 
 	</div>
-	
+
 
 	<footer>
 		<div data-th-replace="~{fragments/footer::footer}"></div>

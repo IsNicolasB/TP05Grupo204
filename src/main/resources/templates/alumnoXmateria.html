@@ -16,11 +16,12 @@
 		<div data-th-replace="~{fragments/header::header}"></div>
 	</header>
 	<div class="row main">
-		<h1 ><span data-th-text="${materia != null ? 'ALUMNOS DE LA MATERIA ' + materia.getNombre() : 'NO HAY MATERIAS'}"></span></h1>
+		<h1 ><span data-th-text="${materia != null ? 'ALUMNOS DE LA MATERIA ' + materia.getNombre() : 'Alumnos de todas las materias'}"></span></h1>
 		<aside class="col-3">
 			<div class="bg-light border-right" id="sidebar-wrapper">
 				<div class="sidebar-heading pb-2 pt-2 text-center border">LISTA DE MATERIAS</div>
 				<div class="list-group list-group-flush border">
+				<a class="list-group-item list-group-item-action bg-light" href="/alumnosPorMateria/0">Todas</a>
 					<a class="list-group-item list-group-item-action bg-light" data-th-each="m : ${listadoMaterias}"
 					 data-th-value="${m.codigo}" data-th-text="${m.nombre}" data-th-href="@{'/alumnosPorMateria/'+${m.codigo}}">
 					</a>
@@ -28,7 +29,8 @@
 			</div>
 		</aside>
 		<section class="col-9">
-				<table class="table table-striped text-center">
+			<div class="table-responsive">
+				<table class="table table-striped table-hover text-center">
 					<thead>
 						<tr>
 							<th scope="col">Libreta Universitaria</th>
@@ -37,8 +39,28 @@
 							<th scope="col">Apellido</th>
 							<th scope="col">Email</th>
 							<th scope="col">Telefono</th>
+							<th scope="col">Materias</th>
 						</tr>
 					</thead>
+					<!-- Mostrar todos los alumnos -->
+                    <tbody data-th-if="${materia == null}">
+                    <tr data-th-each="alumno : ${listadoAlumnos}" data-th-if="${alumno.materias.size()!=0}">
+                        	<td data-th-text="${alumno.lu}"></td>
+							<td data-th-text="${alumno.dni}"></td>
+							<td data-th-text="${alumno.nombre}"></td>
+							<td data-th-text="${alumno.apellido}"></td>
+							<td data-th-text="${alumno.email}"></td>
+							<td data-th-text="${alumno.telefono}"></td>
+							<td>
+							<span data-th-each="materia : ${alumno.materias}" data-th-text="${materia.nombre}">
+                			</span>
+                		</td>
+                
+                    </tr>
+                    </tbody>
+
+                    <!-- Mostrar alumnos por materia -->
+					
 					<tbody data-th-if="${materia != null}">
 						<tr data-th-each="alumno : ${materia.alumnos}">
 							<td data-th-text="${alumno.lu}"></td>
@@ -47,11 +69,15 @@
 							<td data-th-text="${alumno.apellido}"></td>
 							<td data-th-text="${alumno.email}"></td>
 							<td data-th-text="${alumno.telefono}"></td>
+							<td>
+							<span data-th-each="materia : ${alumno.materias}" data-th-text="${materia.nombre}">
+                			</span>
+                		</td>
 						</tr>
 					</tbody>
 				</table>
 				<br>
-				
+				</div>
 		</section>
 
 	</div>

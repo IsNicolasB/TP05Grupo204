@@ -74,6 +74,7 @@ public class AlumnoController {
 	@GetMapping("/modificarAlumno/{lu}")
     public ModelAndView getFormModificarAlumno(@PathVariable(name="lu") String lu) {
 		Alumno alumno = alumnoService.buscarAlumno(lu);
+		alumnoService.borrarRelaciones(alumno);
         ModelAndView modelView = new ModelAndView("formAlumno");
         modelView.addObject("nuevoAlumno", alumno);
         modelView.addObject("carreras",carreraService.mostrarCarreras());
@@ -85,11 +86,13 @@ public class AlumnoController {
     public ModelAndView modificarAlumno(@Valid @ModelAttribute("nuevoAlumno") Alumno alumnoModificado, BindingResult r) {
     	ModelAndView modelView;
     	if(r.hasErrors()) {
+    		alumnoService.borrarRelaciones(alumnoModificado);
     		modelView = new ModelAndView("formAlumno");
     		modelView.addObject("carreras",carreraService.mostrarCarreras());
     		modelView.addObject("flag", true);
     	}else {
     		alumnoService.modificarAlumno(alumnoModificado);
+    		alumnoModificado.getCarrera().getAlumnos().add(alumnoModificado);
             modelView= new ModelAndView("listaDeAlumnos");
             modelView.addObject("listadoAlumnos", alumnoService.mostrarAlumnos());
     	}

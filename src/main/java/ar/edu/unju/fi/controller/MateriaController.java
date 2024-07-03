@@ -25,7 +25,7 @@ import ar.edu.unju.fi.service.CarreraService;
 public class MateriaController {
     
     @Autowired
-    Materia nuevaMateriaDTO;
+    Materia nuevaMateria;
     
     @Autowired
     MateriaService materiaService;
@@ -39,7 +39,7 @@ public class MateriaController {
     @GetMapping("/formularioMaterias")
     public ModelAndView getFormMateria() {
         ModelAndView modelView = new ModelAndView("formMateria");
-        modelView.addObject("nuevaMateria", nuevaMateriaDTO);
+        modelView.addObject("nuevaMateria", nuevaMateria);
         modelView.addObject("listadoDocentes", docenteService.mostrarDocentes());
         modelView.addObject("flag", false);
         return modelView;

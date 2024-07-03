@@ -14,4 +14,5 @@ public interface CarreraService{
 	public void borrarCarrera(Integer codigo);
 	public Carrera buscarCarrera(Integer codigo);
 	public void modificarCarrera(Carrera carrera);
+	public void borrarRelaciones(Carrera carrera);
 }

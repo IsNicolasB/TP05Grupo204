@@ -15,58 +15,57 @@
 	<header>
 		<div data-th-replace="~{fragments/header::header}"></div>
 	</header>
-	<section class="section">
+	<section class="row section justify-content-center text-center">
 		<h1>FORMULARIO CARRERA</h1>
-		<div class="row justify-content-center text-center">
-			<div class="col-sm-9 col-md-6 ">
-				<form data-th-object="${nuevaCarrera}" data-th-action="${flag}?@{/modificarCarrera}:@{/guardarCarrera}"
-					method="post" class="form">
+		<div class="col-sm-9 col-md-6 ">
+			<form data-th-object="${nuevaCarrera}" data-th-action="${flag}?@{/modificarCarrera}:@{/guardarCarrera}"
+				method="post" class="form">
 
-					<label for="codigo" class="form-label mt-1">Codigo</label>
-					<input type="text" class="form-control" id="codigo" data-th-field="*{codigo}"
-						data-th-readonly="${flag}" data-th-disabled="!${flag}" placeholder="Codigo Autogenerado">
+				<label for="codigo" class="form-label mt-1">Codigo</label>
+				<input type="text" class="form-control" id="codigo" data-th-field="*{codigo}" data-th-readonly="${flag}"
+					data-th-disabled="!${flag}" placeholder="Codigo Autogenerado">
 
-					<label for="nombre" class="form-label mt-1">Nombre Carrera</label>
-					<input type="text" class="form-control" id="nombre" data-th-field="*{nombre}"
-						placeholder="El Nombre debe tener al menos 3 caracteres"
-						data-th-classappend="${#fields.hasErrors('nombre')} ? 'is-invalid' : ''">
-					<p class="form-text text-danger" data-th-if="${#fields.hasErrors('nombre')}"
-						data-th-errors="*{nombre}"></p>
+				<label for="nombre" class="form-label mt-1">Nombre Carrera</label>
+				<input type="text" class="form-control" id="nombre" data-th-field="*{nombre}"
+					placeholder="El Nombre debe tener al menos 3 caracteres"
+					data-th-classappend="${#fields.hasErrors('nombre')} ? 'is-invalid' : ''">
+				<p class="form-text text-danger" data-th-if="${#fields.hasErrors('nombre')}" data-th-errors="*{nombre}">
+				</p>
 
 
-					<label for="duracion" class="form-label mt-1">Cantidad de Años</label>
-					<input type="number" class="form-control" id="duracion" data-th-field="*{duracion}"
-						placeholder="El Rango de duración es entre 3 y 6 años"
-						data-th-classappend="${#fields.hasErrors('duracion')} ? 'is-invalid' : ''">
-					<p class="form-text text-danger" data-th-if="${#fields.hasErrors('duracion')}"
-						data-th-errors="*{duracion}"></p>
+				<label for="duracion" class="form-label mt-1">Cantidad de Años</label>
+				<input type="number" class="form-control" id="duracion" data-th-field="*{duracion}"
+					placeholder="El Rango de duración es entre 3 y 6 años"
+					data-th-classappend="${#fields.hasErrors('duracion')} ? 'is-invalid' : ''">
+				<p class="form-text text-danger" data-th-if="${#fields.hasErrors('duracion')}"
+					data-th-errors="*{duracion}"></p>
 
-					<label class="form-label mt-1">Alumnos</label>
-					<select data-th-field="*{alumnos}" class="form-select text-center" multiple required>
-						<option value="" disabled>Seleccionar alumnos</option>
-						<option data-th-each="alumno : ${listadoAlumnos}" data-th-value="${alumno.lu}"
-							data-th-text="${alumno.nombre}"></option>
-					</select>
+				<label class="form-label mt-1">Alumnos</label>
+				<select data-th-field="*{alumnos}" class="form-select text-center" multiple required>
+					<option value="" disabled>Seleccionar alumnos</option>
+					<option data-th-each="alumno : ${listadoAlumnos}" data-th-value="${alumno.lu}"
+						data-th-text="${alumno.nombre}"></option>
+				</select>
 
-					<label class="form-label mt-1">Materias</label>
-					<select data-th-field="*{materias}" class="form-select text-center" multiple required>
-						<option value="" disabled>Seleccionar materia</option>
-						<option data-th-each="materia : ${listadoMaterias}" data-th-value="${materia.codigo}"
-							data-th-text="${materia.nombre}"> </option>
-					</select>
+				<label class="form-label mt-1">Materias</label>
+				<select data-th-field="*{materias}" class="form-select text-center" multiple required>
+					<option value="" disabled>Seleccionar materia</option>
+					<option data-th-each="materia : ${listadoMaterias}" data-th-value="${materia.codigo}"
+						data-th-text="${materia.nombre}"> </option>
+				</select>
 
-					<label class="form-label" for="estado">Estado</label>
-					<select data-th-field="*{estado}" class="form-select"
-						data-th-classappend="${#fields.hasErrors('estado')} ? 'is-invalid' : ''">
-						<option data-th-value="true">True</option>
-						<option data-th-value="false">False</option>
-					</select>
-					<p class="form-text text-danger" data-th-if="${#fields.hasErrors('estado')}"
-						data-th-errors="*{estado}"></p>
+				<label class="form-label" for="estado">Estado</label>
+				<select data-th-field="*{estado}" class="form-select"
+					data-th-classappend="${#fields.hasErrors('estado')} ? 'is-invalid' : ''">
+					<option data-th-value="true">True</option>
+					<option data-th-value="false">False</option>
+				</select>
+				<p class="form-text text-danger" data-th-if="${#fields.hasErrors('estado')}" data-th-errors="*{estado}">
+				</p>
 
-					<button type="submit" class="btn btn-primary mt-2 mb-3">Guardar Carrera</button>
-				</form>
-			</div>
+				<button type="submit" class="btn btn-primary mt-2 mb-3">Guardar Carrera</button>
+			</form>
+			<br>
 		</div>
 		<br>
 	</section>
