@@ -22,6 +22,8 @@ public interface DocenteMapDTO {
 	
 	DocenteDTO convertirDocenteADocenteDTO(Docente d);
 	
+	@Mapping(target = "estado", ignore = true)
+	@Mapping(target = "telefono", ignore = true)
 	@InheritInverseConfiguration
 	Docente convertirDocenteDTOADocente(DocenteDTO ddto);
 	

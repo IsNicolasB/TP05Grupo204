@@ -21,7 +21,7 @@
 			<div class="bg-light border-right" id="sidebar-wrapper">
 				<div class="sidebar-heading pb-2 pt-2 text-center border">LISTA DE MATERIAS</div>
 				<div class="list-group list-group-flush border">
-				<a class="list-group-item list-group-item-action bg-light" href="/alumnosPorMateria/all">Todas</a>
+				<a class="list-group-item list-group-item-action bg-light" href="/alumnosPorMateria/0">Todas</a>
 					<a class="list-group-item list-group-item-action bg-light" data-th-each="m : ${listadoMaterias}"
 					 data-th-value="${m.codigo}" data-th-text="${m.nombre}" data-th-href="@{'/alumnosPorMateria/'+${m.codigo}}">
 					</a>
@@ -29,7 +29,8 @@
 			</div>
 		</aside>
 		<section class="col-9">
-				<table class="table table-striped text-center">
+			<div class="table-responsive">
+				<table class="table table-striped table-hover text-center">
 					<thead>
 						<tr>
 							<th scope="col">Libreta Universitaria</th>
@@ -68,11 +69,15 @@
 							<td data-th-text="${alumno.apellido}"></td>
 							<td data-th-text="${alumno.email}"></td>
 							<td data-th-text="${alumno.telefono}"></td>
+							<td>
+							<span data-th-each="materia : ${alumno.materias}" data-th-text="${materia.nombre}">
+                			</span>
+                		</td>
 						</tr>
 					</tbody>
 				</table>
 				<br>
-				
+				</div>
 		</section>
 
 	</div>
