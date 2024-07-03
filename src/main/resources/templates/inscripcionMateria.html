@@ -7,15 +7,7 @@
     <link rel="icon" href="/images/logo.ico">
     <link rel="stylesheet" href="/css/styles.css">
     <link rel="stylesheet" href="/webjars/bootstrap/5.3.3/css/bootstrap.min.css">
-    <style>
-        /* Estilo para centrar la sección */
-        .section {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh; /* Ajusta la altura como desees */
-        }
-    </style>
+
 </head>
 <body>
     <header>
@@ -43,10 +35,15 @@
               		<button type="submit" class="btn btn-primary mt-2 mb-3" >Inscribir Materia</button>
               		<br>
               	</div>
-              	<div data-th-if="${Mensaje}" class="alert alert-success text-center" role="alert">
+              	<div data-th-if="${Band==3}" class="alert alert-success text-center" role="alert">
     				<p class=" "data-th-text="${Mensaje}"></p>
 				</div>
-              	
+              	<div data-th-if="${Band==2}" class="alert alert-warning text-center" role="alert">
+    				<p class=" "data-th-text="${Mensaje}"></p>
+				</div>
+				<div data-th-if="${Band==1}" class="alert alert-danger text-center" role="alert">
+    				<p class=" "data-th-text="${Mensaje}"></p>
+				</div>
               	<div class="alert alert-danger text-center " role="alert" data-th-if="${listaDeMaterias == null or listaDeMaterias.size() == 0}">
               		<br>
 		  			<p >AHORA NO HAY MATERIAS DISPONIBLES</p>

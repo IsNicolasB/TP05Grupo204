@@ -73,10 +73,13 @@ public class MateriaController {
 
         if (alumno == null || materia == null) {
             modelView.addObject("Mensaje", "Error: Alumno o Materia no encontrados.");
+            modelView.addObject("Band", 1);
         } else if (alumno.getMaterias().contains(materia)) {
             modelView.addObject("Mensaje", "El alumno ya está inscripto en esta materia");
+            modelView.addObject("Band", 2);
         } else {
             modelView.addObject("Mensaje", "La inscripción se realizó correctamente");
+            modelView.addObject("Band", 3);
             alumno.getMaterias().add(materia);
             alumnoService.inscribirMateria(alumno);
         }

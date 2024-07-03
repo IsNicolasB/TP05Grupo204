@@ -3,64 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Facultad de Ingeniería - Inscripción a Materias</title>
+    <title>Facultad de Ingeniería</title>
     <link rel="icon" href="/images/logo.ico">
-    <link rel="stylesheet" href="/css/styles.css">
-    <link rel="stylesheet" href="/webjars/bootstrap/5.3.3/css/bootstrap.min.css">
-    <style>
-        /* Estilo para centrar la sección */
-        .section {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh; /* Ajusta la altura como desees */
-        }
-    </style>
+    <link rel="stylesheet" data-th-href="@{/css/styles.css}">
+    <link rel="stylesheet" data-th-href="@{/webjars/bootstrap/5.3.3/css/bootstrap.min.css}">
 </head>
 <body>
     <header>
         <div data-th-replace="~{fragments/header::header}"></div>
     </header>
-    <section class="section">
-        <div class="container">
-            <h1 class="text-center mb-4">INSCRIPCIÓN A MATERIAS</h1>
-            <form action="/inscripcionMaterias" method="post" data-th-action="@{/guardarInscripcion}">
-                <div class="row justify-content-center">
-                    <div class="col-md-6">
-                        <label for="lu" class="form-label mt-1">Libreta Universitaria</label>
-                        <select class="form-select" id="alumnoId" name="alumnoId">
-                            <option data-th-each="alumno : ${listadoAlumnos}" data-th-value="${alumno.lu}" data-th-text="${alumno.lu + ' - ' + alumno.apellido + ', ' + alumno.nombre}"></option>
+    <section class="row section justify-content-center text-center">
+        <h1>FORMULARIO DE MATERIA</h1>
+        <div class="justify-content-center text-center">
+            <form data-th-object="${nuevaMateria}" data-th-action="${flag}?@{/modificarMateria}:@{/guardarMateria}" method="post" class="form">
+                <div data-th-if="${errorMessage}" class="alert alert-danger" role="alert">
+                    <span data-th-text="${errorMessage}"></span>
+                </div>
+                <div class="row">
+                    <div class="col-sm-9 col-md-6">
+                        <label for="codigo" class="form-label mt-1">Código</label>
+                        <input type="text" class="form-control" id="codigo" data-th-field="*{codigo}" data-th-readonly="${flag}" data-th-disabled="!${flag}" placeholder="Codigo Autogenerado">
+						
+                        <label for="nombre" class="form-label mt-1">Nombre</label>
+                        <input type="text" class="form-control" id="nombre" data-th-field="*{nombre}" placeholder="Nombre de la Materia" required>
+                        <p class="alert alert-warning" role="alert" data-th-if="${#fields.hasErrors('nombre')}" data-th-errors="*{nombre}"></p>
+                    </div>
+                    <div class="col-sm-9 col-md-6">
+                        <label for="curso" class="form-label mt-1">Curso</label>
+                        <input type="text" class="form-control" id="curso" data-th-field="*{curso}" placeholder="Curso de la Materia" required>
+                        <p class="alert alert-warning" role="alert" data-th-if="${#fields.hasErrors('curso')}" data-th-errors="*{curso}"></p>
+
+                        <label for="horas" class="form-label mt-1">Horas</label>
+                        <input type="number" class="form-control" id="horas" data-th-field="*{cantidadHoras}" placeholder="Cantidad de Horas Totales">
+                        <p class="alert alert-warning" role="alert" data-th-if="${#fields.hasErrors('cantidadHoras')}" data-th-errors="*{cantidadHoras}"></p>
+                    </div>
+                    <div class="col-sm-9 col-md-6">
+                        <label for="estadoMateria" class="form-label mt-1">Estado</label><br>
+                        <select class="form-select text-center" id="estadoMateria" data-th-field="*{estado}">
+                            <option value="true">True</option>
+                            <option value="false">False</option>
                         </select>
-                        <br>
-                        <label for="materias" class="form-label mt-1">Materias Disponibles</label>
-                        <select class="form-select" id="materiaId" name="materiaId">
-                            <option data-th-each="materia : ${listaDeMaterias}" data-th-value="${materia.codigo}" data-th-text="${materia.nombre}"></option>
+                        <p class="alert alert-warning" role="alert" data-th-if="${#fields.hasErrors('estado')}" data-th-errors="*{estado}"></p>
+                    </div>
+                    <div class="col-sm-9 col-md-6 text-center">
+                        <label for="modalidad" class="form-label mt-1">Modalidad</label><br>
+                        <select class="form-select text-center" id="modalidad" data-th-field="*{modalidad}">
+                            <option value="">Seleccionar Modalidad</option>
+                            <option value="Presencial">Presencial</option>
+                            <option value="Virtual">Virtual</option>
                         </select>
+                        <p class="alert alert-warning" role="alert" data-th-if="${#fields.hasErrors('modalidad')}" data-th-errors="*{modalidad}"></p>
+                    </div>
+                    <div class="col-sm-9 col-md-6 text-center">
+                        <label for="docente" class="form-label mt-1">Docente</label><br>
+                        <select class="form-select text-center" id="docente" data-th-field="*{docente}"  required>
+                            <option value="">Seleccionar Docente</option>
+                            <option data-th-each="d : ${listadoDocentes}" data-th-value="${d.legajo}" data-th-text="${d.apellido}"></option>
+                        </select>
+                        <p class="alert alert-warning" role="alert" data-th-if="${#fields.hasErrors('docente')}" data-th-errors="*{docente}"></p>
                     </div>
                 </div>
-                <div  data-th-if="${listaDeMaterias != null and !listaDeMaterias.isEmpty()}" >
-
-              		<button type="submit" class="btn btn-primary mt-2 mb-3" >Inscribir Materia</button>
-              		<br>
-              	</div>
-              	<div data-th-if="${Band==3}" class="alert alert-success text-center" role="alert">
-    				<p class=" "data-th-text="${Mensaje}"></p>
-				</div>
-              	<div data-th-if="${Band==2}" class="alert alert-warning text-center" role="alert">
-    				<p class=" "data-th-text="${Mensaje}"></p>
-				</div>
-				<div data-th-if="${Band==1}" class="alert alert-danger text-center" role="alert">
-    				<p class=" "data-th-text="${Mensaje}"></p>
-				</div>
-              	<div class="alert alert-danger text-center " role="alert" data-th-if="${listaDeMaterias == null or listaDeMaterias.size() == 0}">
-              		<br>
-		  			<p >AHORA NO HAY MATERIAS DISPONIBLES</p>
-				</div>
-
+                <button type="submit" class="btn btn-primary mt-2 mb-3">Guardar Materia</button>
             </form>
         </div>
+        <br>
     </section>
-    
-    <script src="/webjars/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+    <footer>
+        <div data-th-replace="~{fragments/footer::footer}"></div>
+    </footer>
+
+    <script data-th-src="@{/webjars/bootstrap/5.3.3/js/bootstrap.bundle.min.js}"></script>
 </body>
 </html>
