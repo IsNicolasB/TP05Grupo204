@@ -15,36 +15,40 @@
 	<header>
 		<div data-th-replace="~{fragments/header::header}"></div>
 	</header>
-	<section class="section">
+	<section class="row section">
 		<h1> LISTADO DE CARRERAS </h1>
-		<table class="table table-striped text-center">
-			<thead>
-				<tr>
-					<th scope="col">Codigo</th>
-					<th scope="col">Nombre</th>
-					<th scope="col">Cantidad de Años</th>
-					<th scope="col">Cantidad de Alumnos</th>
-					<th scope="col">Cantidad de Materias</th>
-					<!--<th scope="col">Estado</th> -->
-					<th scope="col">Edición</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr data-th-each="carrera : ${listadoCarreras}">
-					<td data-th-text="${ '#' + carrera.codigo}"></td>
-					<td data-th-text="${carrera.nombre}"></td>
-					<td data-th-text="${carrera.duracion + ' Años'}"></td>
-					<td data-th-text="${carrera.alumnos.size() == 0 ? 'Sin Alumnos' : carrera.alumnos.size()}"></td>
-					<td data-th-text="${carrera.materias.size() == 0 ? 'Sin Materias' : carrera.materias.size()}"></td>
-					<!--<td data-th-text="${carrera.estado}"></td> -->
-					<td>
-						<a data-th-href="@{'/borrarCarrera/'+${carrera.codigo}}" class="btn btn-danger">Borrar</a>
-						<a data-th-href="@{'/modificarCarrera/'+${carrera.codigo}}"
-							class="btn btn-warning">Modificar</a>
-					</td>
-				</tr>
-			</tbody>
-		</table>
+		<div class="table-responsive">
+			<table class="table table-striped table-hover text-center">
+				<thead>
+					<tr>
+						<th scope="col">Codigo</th>
+						<th scope="col">Nombre</th>
+						<th scope="col">Cantidad de Años</th>
+						<th scope="col">Cantidad de Alumnos</th>
+						<th scope="col">Cantidad de Materias</th>
+						<!--<th scope="col">Estado</th> -->
+						<th scope="col">Edición</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr data-th-each="carrera : ${listadoCarreras}">
+						<td data-th-text="${ '#' + carrera.codigo}"></td>
+						<td data-th-text="${carrera.nombre}"></td>
+						<td data-th-text="${carrera.duracion + ' Años'}"></td>
+						<td data-th-text="${carrera.alumnos.size() == 0 ? 'Sin Alumnos' : carrera.alumnos.size()}"></td>
+						<td data-th-text="${carrera.materias.size() == 0 ? 'Sin Materias' : carrera.materias.size()}">
+						</td>
+						<!--<td data-th-text="${carrera.estado}"></td> -->
+						<td>
+							<a data-th-href="@{'/borrarCarrera/'+${carrera.codigo}}" class="btn btn-danger">Borrar</a>
+							<a data-th-href="@{'/modificarCarrera/'+${carrera.codigo}}"
+								class="btn btn-warning">Modificar</a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<br>
+		</div>
 		<div class="alert alert-danger text-center " role="alert" data-th-if=${errors}>
 			<div data-th-text="${cargaCarreraErrorMessage}"></div>
 		</div>

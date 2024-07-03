@@ -88,6 +88,7 @@ public class CarreraController {
 	@GetMapping("/modificarCarrera/{codigo}")
 	public ModelAndView getFormModificarCarrera(@PathVariable(name = "codigo") Integer codigo) {
 		Carrera carrera = carreraService.buscarCarrera(codigo);
+		carreraService.borrarRelaciones(carrera);
 		ModelAndView modelView = new ModelAndView("formCarrera");
 		modelView.addObject("nuevaCarrera", carrera);
 		modelView.addObject("listadoAlumnos", alumnoService.mostrarAlumnos());
@@ -103,6 +104,7 @@ public class CarreraController {
 		ModelAndView modelView = new ModelAndView();
 
 		if (resultado.hasErrors()) {
+			carreraService.borrarRelaciones(carreraModificada);
 			modelView.setViewName("formCarrera");
 			modelView.addObject("listadoAlumnos", alumnoService.mostrarAlumnos());
 			modelView.addObject("listadoMaterias", materiaService.mostrarMaterias());
@@ -127,6 +129,7 @@ public class CarreraController {
 	@GetMapping("/alumnosPorCarrera/{codigo}")
 	public ModelAndView getFormAlumnosPorCarreraB(@PathVariable(name = "codigo") Integer codigo) {
 		ModelAndView modelView = new ModelAndView("alumnosXcarrera");
+		modelView.addObject("listadoAlumnos", alumnoService.mostrarAlumnos());
 		modelView.addObject("listadoCarreras", carreraService.mostrarCarreras());
 		modelView.addObject("carrera", carreraService.buscarCarrera(codigo));
 
