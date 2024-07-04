@@ -62,6 +62,16 @@
                         </select>
                         <p class="alert alert-warning" role="alert" data-th-if="${#fields.hasErrors('docente')}" data-th-errors="*{docente}"></p>
                     </div>
+                    
+					<div class="col-sm-9 col-md-6 text-center">
+                        <label for="carrera" class="form-label mt-1">Carrera</label><br>
+                        <select class="form-select text-center" id="carrera" data-th-field="*{carrera}">
+                            <option value="">Seleccionar Carrera</option>
+                            <option data-th-each="c : ${listadoCarreras}" data-th-value="${c.codigo}" data-th-text="${c.nombre}"></option>
+                        </select>
+                        <p class="alert alert-warning" role="alert" data-th-if="${#fields.hasErrors('carrera')}" data-th-errors="*{carrera}"></p>
+                    </div>
+                    
                 </div>
                 <button type="submit" class="btn btn-primary mt-2 mb-3">Guardar Materia</button>
             </form>
