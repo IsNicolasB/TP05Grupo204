@@ -9,7 +9,9 @@ import ar.edu.unju.fi.DTO.CarreraDTO;
 import ar.edu.unju.fi.map.CarreraMapDTO;
 import ar.edu.unju.fi.model.Carrera;
 import ar.edu.unju.fi.repository.CarreraRepository;
+import ar.edu.unju.fi.service.AlumnoService;
 import ar.edu.unju.fi.service.CarreraService;
+import ar.edu.unju.fi.service.MateriaService;
 
 @Service
 public class CarreraServiceImp implements CarreraService{
@@ -19,6 +21,12 @@ public class CarreraServiceImp implements CarreraService{
 	
 	@Autowired
 	CarreraMapDTO carreraMapDTO;
+	
+	@Autowired
+	AlumnoService alumnoService;
+	
+	@Autowired
+	MateriaService materiaService;
 	
 	@Override
 	public void guardarCarrera(Carrera carrera) {
@@ -37,7 +45,7 @@ public class CarreraServiceImp implements CarreraService{
 		carreras.forEach(carrera -> {
 			if(carrera.getCodigo().equals(codigo)) {
 				carrera.getAlumnos().forEach(a -> a.setCarrera(null));
-				carrera.getMaterias().forEach(m -> m.setCarrera(null));
+				carrera.getMaterias().forEach(m ->m.setCarrera(null));
 				carrera.setEstado(false);
 				carreraRepository.save(carrera);
 			}
@@ -66,7 +74,7 @@ public class CarreraServiceImp implements CarreraService{
 		carrera.getMaterias().forEach(m -> m.setCarrera(null));
 		carrera.getAlumnos().clear();
 		carrera.getMaterias().clear();
-		
+		carreraRepository.save(carrera);
 	}
 	
 }

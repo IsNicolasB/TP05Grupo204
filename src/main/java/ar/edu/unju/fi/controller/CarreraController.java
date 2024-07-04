@@ -104,7 +104,7 @@ public class CarreraController {
 		ModelAndView modelView = new ModelAndView();
 
 		if (resultado.hasErrors()) {
-			carreraService.borrarRelaciones(carreraModificada);
+			//carreraService.borrarRelaciones(carreraModificada);
 			modelView.setViewName("formCarrera");
 			modelView.addObject("listadoAlumnos", alumnoService.mostrarAlumnos());
 			modelView.addObject("listadoMaterias", materiaService.mostrarMaterias());

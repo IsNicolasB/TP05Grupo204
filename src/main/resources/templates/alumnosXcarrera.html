@@ -58,8 +58,8 @@
 							<td data-th-text="${alumno.apellido}"></td>
 							<td data-th-text="${alumno.email}"></td>
 							<td data-th-text="${alumno.telefono}"></td>
-							<td data-th-text="${alumno.carrera.nombre}"></td>
-							<td data-th-text="${alumno.materias.size()}"></td>
+							<td data-th-text="${alumno.carrera != null ? alumno.carrera.nombre : 'Sin Carrera'}"></td>
+							<td data-th-text="${alumno.materias != null ? alumno.materias.size() : 'Sin Materias'}"></td>
 
 						</tr>
 					</tbody>
@@ -72,8 +72,8 @@
 							<td data-th-text="${alumno.apellido}"></td>
 							<td data-th-text="${alumno.email}"></td>
 							<td data-th-text="${alumno.telefono}"></td>
-							<td data-th-text="${alumno.carrera.nombre}"></td>
-							<td data-th-text="${alumno.materias.size()}"></td>
+							<td data-th-text="${alumno.carrera != null ? alumno.carrera.nombre : 'Sin Carrera'}"></td>
+							<td data-th-text="${alumno.materias != null ? alumno.materias.size() : 'Sin Materias'}"></td>
 						</tr>
 					</tbody>
 				</table>
