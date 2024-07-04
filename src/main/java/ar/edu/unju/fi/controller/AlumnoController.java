@@ -86,7 +86,7 @@ public class AlumnoController {
     public ModelAndView modificarAlumno(@Valid @ModelAttribute("nuevoAlumno") Alumno alumnoModificado, BindingResult r) {
     	ModelAndView modelView;
     	if(r.hasErrors()) {
-    		if(alumnoModificado.getCarrera() != null)  alumnoService.borrarRelaciones(alumnoModificado);
+    		//if(alumnoModificado.getCarrera() != null)  alumnoService.borrarRelaciones(alumnoModificado);
     		modelView = new ModelAndView("formAlumno");
     		modelView.addObject("carreras",carreraService.mostrarCarreras());
     		modelView.addObject("flag", true);
