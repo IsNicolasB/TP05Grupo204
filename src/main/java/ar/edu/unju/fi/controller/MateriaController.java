@@ -157,7 +157,8 @@ public class MateriaController {
             modelView.addObject("listadoCarreras", carreraService.mostrarCarreras());
             modelView.addObject("flag", true);
         } else {
-        	        	        	
+        	if (materiaModificada.getCarrera() != null) materiaModificada.getCarrera().getMaterias().add(materiaModificada);
+        	
         	try {
             	materiaService.guardarMateria(materiaModificada);
             } catch(Exception e) {
