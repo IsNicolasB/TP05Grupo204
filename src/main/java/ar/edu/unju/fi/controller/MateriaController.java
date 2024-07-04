@@ -1,7 +1,6 @@
 package ar.edu.unju.fi.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,9 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import ar.edu.unju.fi.DTO.MateriaDTO;
 import ar.edu.unju.fi.model.Alumno;
-import ar.edu.unju.fi.model.Docente;
 import ar.edu.unju.fi.model.Materia;
 import ar.edu.unju.fi.service.MateriaService;
 import jakarta.validation.Valid;
@@ -34,6 +31,9 @@ public class MateriaController {
     DocenteService docenteService;
     
     @Autowired
+    CarreraService carreraService;
+    
+    @Autowired
     AlumnoService alumnoService;
     
     @GetMapping("/formularioMaterias")
@@ -41,6 +41,7 @@ public class MateriaController {
         ModelAndView modelView = new ModelAndView("formMateria");
         modelView.addObject("nuevaMateria", nuevaMateria);
         modelView.addObject("listadoDocentes", docenteService.mostrarDocentes());
+        modelView.addObject("listadoCarreras", carreraService.mostrarCarreras());
         modelView.addObject("flag", false);
         return modelView;
     }
@@ -105,6 +106,7 @@ public class MateriaController {
         if (resultado.hasErrors()) {
             modelView.setViewName("formMateria");
             modelView.addObject("listadoDocentes", docenteService.mostrarDocentes());
+            modelView.addObject("listadoCarreras", carreraService.mostrarCarreras());
         } else {
             try {
             	materiaService.guardarMateria(materiaParaGuardar);
@@ -133,9 +135,11 @@ public class MateriaController {
     @GetMapping("/modificarMateria/{codigo}")
     public ModelAndView getFormModificarMateria(@PathVariable(name="codigo") Integer codigo) {
         Materia materia = materiaService.buscarMateria(codigo);
+        if (materia.getCarrera() != null) materiaService.borrarRelaciones(materia);
         ModelAndView modelView = new ModelAndView("formMateria");
         modelView.addObject("nuevaMateria", materia);
         modelView.addObject("listadoDocentes", docenteService.mostrarDocentes());
+        modelView.addObject("listadoCarreras", carreraService.mostrarCarreras());
         modelView.addObject("flag", true);
         return modelView;
     }
@@ -146,11 +150,22 @@ public class MateriaController {
     	
         ModelAndView modelView = new ModelAndView("listaDeMaterias");
         if (resultado.hasErrors()) {
+        	if (materiaModificada.getCarrera() != null) materiaService.borrarRelaciones(materiaModificada);
+        	
         	modelView.setViewName("formMateria");
             modelView.addObject("listadoDocentes", docenteService.mostrarDocentes());
+            modelView.addObject("listadoCarreras", carreraService.mostrarCarreras());
             modelView.addObject("flag", true);
         } else {
-        	materiaService.modificarMateria(materiaModificada);
+        	        	        	
+        	try {
+            	materiaService.guardarMateria(materiaModificada);
+            } catch(Exception e) {
+            	modelView.addObject("errors", true);
+            	modelView.addObject("cargaMateriaErrorMessage", "Error al cargar en la BD" + e.getMessage());
+            	System.out.println(e.getMessage());
+            }
+        	
         	modelView.addObject("listadoMaterias", materiaService.mostrarMaterias());
         }
         

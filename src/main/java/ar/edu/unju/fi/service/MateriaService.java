@@ -15,4 +15,5 @@ public interface MateriaService {
 	public void borrarMateria (Integer codigo);
 	public void modificarMateria (Materia materia);
 	public Materia buscarMateria(Integer codigo);
+	public void borrarRelaciones(Materia materia ); 
 }

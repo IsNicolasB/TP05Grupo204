@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -56,7 +57,7 @@ public class Materia{
 	@NotNull(message= "Elija un docente para la materia")
 	@JoinColumn(name = "m_leg", referencedColumnName = "legajo", unique=true)
 	private Docente docente;
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(cascade = CascadeType.ALL, fetch=FetchType.LAZY)
 	@JoinColumn(name="c_cod")
 	Carrera carrera;
 	

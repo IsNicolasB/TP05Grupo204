@@ -38,8 +38,10 @@ public class MateriaServiceImp implements MateriaService{
 		List<Materia> materias = materiaRepository.findAll();
 		materias.forEach(materia -> {
 			if(materia.getCodigo().equals(codigo)) {
+				materia.setDocente(null);
 				materia.setEstado(false);
 				materia.getAlumnos().forEach( b -> b.getMaterias().removeIf(c -> c.getCodigo().equals(codigo)));
+				materia.getAlumnos().clear();
 				materiaRepository.save(materia);
 			}
 		});
@@ -63,5 +65,11 @@ public class MateriaServiceImp implements MateriaService{
 		materiaModificada.setEstado(true);
 		materiaRepository.save(materiaModificada);
 	}
-
+	
+	
+	public void borrarRelaciones(Materia materia ) {
+		materia.setCarrera(null);
+		
+		materiaRepository.save(materia);
+	}
 }
