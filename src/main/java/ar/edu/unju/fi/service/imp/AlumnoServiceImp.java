@@ -6,6 +6,7 @@ import ar.edu.unju.fi.DTO.AlumnoDTO;
 import ar.edu.unju.fi.map.AlumnoMapDTO;
 import ar.edu.unju.fi.model.Alumno;
 import ar.edu.unju.fi.repository.AlumnoRepository;
+import ar.edu.unju.fi.repository.CarreraRepository;
 import ar.edu.unju.fi.repository.MateriaRepository;
 import ar.edu.unju.fi.service.AlumnoService;
 
@@ -19,6 +20,9 @@ public class AlumnoServiceImp implements AlumnoService{
 	
 	@Autowired
 	MateriaRepository materiaRepository;
+
+	@Autowired
+	CarreraRepository carreraRepository;
 
     @Override
     public void inscribirMateria(Alumno alumno) {
@@ -46,10 +50,11 @@ public class AlumnoServiceImp implements AlumnoService{
 	public void borrarAlumno(String lu) {
 		alumnoRepository.findAll().forEach(a -> {
 			if(a.getLu().equals(lu)) {
-				borrarRelaciones(a);
+				a.setCarrera(null);
 				a.setEstado(false);
 				a.getMaterias().forEach(m -> m.getAlumnos().removeIf(c -> c.getLu().equals(lu)));
 				a.getMaterias().clear();
+				
 				alumnoRepository.save(a);
 			}
 		});
@@ -67,8 +72,8 @@ public class AlumnoServiceImp implements AlumnoService{
 	
 	@Override
 	public void borrarRelaciones(Alumno alumno) {
-		alumno.getCarrera().getAlumnos().removeIf(e -> e.getLu().equals(lu));
 		alumno.setCarrera(null);
+		alumnoRepository.save(alumno);
 	}
 	
 }
