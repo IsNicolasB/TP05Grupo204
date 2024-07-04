@@ -51,7 +51,7 @@ public class Alumno {
 	@NotBlank(message="Ingrese el Domicilio actual")
 	@Size(max=60, message="Domicilio muy largo")
 	private String domicilio;
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
 	@JoinColumn(name="c_cod")
 	private Carrera carrera;
 	@ManyToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)

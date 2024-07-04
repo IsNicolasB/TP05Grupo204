@@ -96,6 +96,6 @@ public class AlumnoController {
             modelView= new ModelAndView("listaDeAlumnos");
             modelView.addObject("listadoAlumnos", alumnoService.mostrarAlumnos());
     	}
-        return modelView;;
+        return modelView;
     }
 }
